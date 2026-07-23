@@ -779,13 +779,13 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
         <div class="bf">
           <div class="fr">
             <div class="fg"><label class="fl2">Nombre</label><input class="fi2" type="text" id="bname" placeholder="Tu nombre completo"></div>
-            <div class="fg"><label class="fl2">País</label><select class="fi2"><option>🇨🇴 Colombia</option><option>🇪🇨 Ecuador</option><option>🇲🇽 México</option><option>🇵🇦 Panamá</option><option>🌎 Otro LATAM</option></select></div>
+            <div class="fg"><label class="fl2">País</label><select class="fi2" id="bpais"><option>🇨🇴 Colombia</option><option>🇪🇨 Ecuador</option><option>🇲🇽 México</option><option>🇵🇦 Panamá</option><option>🌎 Otro LATAM</option></select></div>
           </div>
           <div class="fr">
-            <div class="fg"><label class="fl2">WhatsApp</label><input class="fi2" type="tel" placeholder="+57 300 000 0000"></div>
-            <div class="fg"><label class="fl2">Email</label><input class="fi2" type="email" placeholder="tu@email.com"></div>
+            <div class="fg"><label class="fl2">WhatsApp</label><input class="fi2" type="tel" id="bwa" placeholder="+57 300 000 0000"></div>
+            <div class="fg"><label class="fl2">Email</label><input class="fi2" type="email" id="bemail" placeholder="tu@email.com"></div>
           </div>
-          <div class="fg"><label class="fl2">¿Cuál es tu principal reto?</label><textarea class="fi2" rows="3" placeholder="Ej: No sé si mi tienda es rentable, tengo muchas devoluciones, quiero escalar..."></textarea></div>
+          <div class="fg"><label class="fl2">¿Cuál es tu principal reto?</label><textarea class="fi2" rows="3" id="breto" placeholder="Ej: No sé si mi tienda es rentable, tengo muchas devoluciones, quiero escalar..."></textarea></div>
           <div class="fg">
             <label class="fl2">Método de Pago</label>
             <div class="po">
@@ -1214,10 +1214,20 @@ function setPay(el){
   document.getElementById('payinfo').innerHTML = payMsgs[el.textContent.trim()] || Object.values(payMsgs)[0];
 }
 function doBook(){
-  const n = document.getElementById('bname').value;
+  const n = document.getElementById('bname').value.trim();
+  const wa = document.getElementById('bwa').value.trim();
   if(!n){alert('Por favor ingresa tu nombre.');return;}
+  if(!wa){alert('Por favor ingresa tu WhatsApp — así te confirmamos la sesión.');return;}
+  const pais = document.getElementById('bpais').value;
+  const email = document.getElementById('bemail').value.trim();
+  const reto = document.getElementById('breto').value.trim();
+  const pago = document.querySelector('.p-opt.on').textContent.replace(/\s+/g,' ').trim();
   const svc = document.querySelector('.bt.on .btn2').textContent.replace(/\n/g,' ').trim();
-  const msg = encodeURIComponent(`Hola Joan! Quiero reservar una sesión de *${svc}* en DIZGO. Mi nombre es ${n}. ¿Cuál es el siguiente paso?`);
+  let txt = `Hola Joan! Quiero reservar una sesión de *${svc}* en DIZGO.\n\nNombre: ${n}\nPaís: ${pais}\nWhatsApp: ${wa}`;
+  if(email) txt += `\nEmail: ${email}`;
+  if(reto) txt += `\nMi reto: ${reto}`;
+  txt += `\nMétodo de pago preferido: ${pago}\n\n¿Cuál es el siguiente paso?`;
+  const msg = encodeURIComponent(txt);
   window.open(`https://wa.me/573206348574?text=${msg}`,'_blank');
 }
 </script>
