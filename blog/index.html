@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog DIZGO — Finanzas y comercio electrónico en LATAM</title>
+<meta name="description" content="Análisis, datos reales y recomendaciones de e-commerce y dropshipping en LATAM, publicados por Joan Torres. Finanzas, regulación, plataformas y casos reales.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305080F'/%3E%3Crect x='8' y='8' width='48' height='48' rx='11' fill='%23E8A020'/%3E%3Ctext x='32' y='44' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='32' text-anchor='middle' fill='%230A0D14'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/blog.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="ni">
+      <a href="/" class="logo"><div class="logo-i">DZ</div>DI<span>Z</span>GO</a>
+      <div class="nl">
+        <a href="/#app">La App</a>
+        <a href="/#academia">Academia</a>
+        <a href="/blog/" class="on">Blog</a>
+        <a href="/#consultoria">Consultoría</a>
+        <a href="/#precios">Precios</a>
+      </div>
+      <a href="https://app.dizgo.app" class="btn bg">Entrar a la App</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div style="max-width:680px">
+      <span class="tag tg">Blog DIZGO</span>
+      <h1 style="font-size:clamp(28px,4.5vw,44px);font-weight:800;margin:14px 0 12px;text-wrap:balance">Finanzas y comercio electrónico en LATAM, con datos reales</h1>
+      <p style="font-size:15px;color:var(--t2);line-height:1.7">Análisis, oportunidades y casos reales — publicado por Joan Torres, con investigación asistida por IA y curaduría editorial propia. Cada dato lleva su fuente.</p>
+    </div>
+
+    <!-- PANEL INTERACTIVO -->
+    <div style="margin-top:36px">
+      <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">¿Qué te interesa? Selecciona uno o varios</div>
+      <div class="filter-bar" id="filterBar"></div>
+      <div class="analysis-box" id="analysisBox">
+        <h4>📊 Análisis para tu selección</h4>
+        <p id="analysisText"></p>
+      </div>
+    </div>
+
+    <div class="post-grid" id="postGrid" style="margin-top:8px"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="text-align:center">
+    <p style="font-size:12px;color:var(--t3)">DIZGO · Hallazgo de dinero para tu tienda · <a href="/" style="color:var(--gold)">Volver al sitio principal</a></p>
+  </div>
+</footer>
+
+<script>
+// ── DATOS DE POSTS (cada uno con fuente real) ──
+const POSTS = [
+  {
+    slug:'punto-equilibrio-dropshipping',
+    title:'Cómo calcular tu punto de equilibrio real en dropshipping (con ejemplo completo)',
+    excerpt:'La mayoría de tiendas venden bien y ganan poco. La fórmula real, explicada con un ejemplo numérico de principio a fin.',
+    date:'2026-07-26',
+    tags:['finanzas','metodologia','costos']
+  },
+  {
+    slug:'tiktok-shop-colombia-2026',
+    title:'TikTok Shop en Colombia 2026: lo que dicen las cifras reales (no el hype)',
+    excerpt:'Comisiones, primeros ingresos reportados por vendedores y categorías que dominan — sin inflar expectativas.',
+    date:'2026-07-26',
+    tags:['plataformas','regulacion','colombia','logistica']
+  },
+];
+
+const TAG_LABEL = {
+  finanzas:'💰 Finanzas', metodologia:'📐 Metodología', costos:'📊 Costos',
+  plataformas:'🛍️ Plataformas', regulacion:'⚖️ Regulación', colombia:'🇨🇴 Colombia',
+  logistica:'🚚 Logística', pagos:'💳 Pagos digitales', 'casos-reales':'📈 Casos reales',
+};
+
+const TAG_ANALYSIS = {
+  finanzas:'Tu selección incluye Finanzas: el enfoque aquí es que dejes de operar por intuición. Cada artículo bajo esta etiqueta te da una fórmula o método aplicable hoy mismo a tu estructura de costos real.',
+  metodologia:'Contenido de Metodología: procesos paso a paso, no solo teoría — pensados para aplicarse directamente a tu tienda esta semana.',
+  costos:'Costos: la causa número uno de que una tienda facture mucho y gane poco. Estos artículos te ayudan a encontrar lo que hoy no estás viendo.',
+  plataformas:'Plataformas: seguimiento de qué canales de venta están funcionando de verdad en LATAM, con cifras reportadas por vendedores reales, no proyecciones de marketing.',
+  regulacion:'Regulación: cambios normativos que pueden afectar tu operación o tu cuenta publicitaria — para que te enteres antes de que te tome por sorpresa.',
+  colombia:'Filtrando por Colombia: contenido específico al mercado colombiano — comisiones, transportadoras, medios de pago y regulación local.',
+  logistica:'Logística: transportadoras, tiempos de entrega y cómo la operación logística impacta directamente tu margen, no solo tu experiencia de cliente.',
+  pagos:'Pagos digitales: métodos de pago, pasarelas y su costo real dentro de tu estructura de precios.',
+  'casos-reales':'Casos reales: ejemplos concretos, con cifras, de qué funcionó y qué no — para que aprendas del patrón antes de repetir el error.',
+};
+
+let activeFilters = new Set();
+
+function renderFilterBar(){
+  const allTags = [...new Set(POSTS.flatMap(p=>p.tags))];
+  document.getElementById('filterBar').innerHTML = allTags.map(t=>
+    `<button class="filter-pill ${activeFilters.has(t)?'on':''}" onclick="toggleFilter('${t}')">${TAG_LABEL[t]||t}</button>`
+  ).join('');
+}
+
+function toggleFilter(tag){
+  activeFilters.has(tag) ? activeFilters.delete(tag) : activeFilters.add(tag);
+  renderFilterBar();
+  renderPosts();
+  renderAnalysis();
+}
+
+function renderAnalysis(){
+  const box = document.getElementById('analysisBox');
+  if(activeFilters.size === 0){ box.classList.remove('show'); return; }
+  box.classList.add('show');
+  document.getElementById('analysisText').textContent =
+    [...activeFilters].map(t=>TAG_ANALYSIS[t]).filter(Boolean).join(' ');
+}
+
+function renderPosts(){
+  const filtered = activeFilters.size === 0
+    ? POSTS
+    : POSTS.filter(p => p.tags.some(t=>activeFilters.has(t)));
+  const grid = document.getElementById('postGrid');
+  if(filtered.length === 0){
+    grid.innerHTML = `<p style="color:var(--t3);font-size:13px;grid-column:1/-1">Todavía no hay artículos con esa combinación — publicamos 2 veces por semana, vuelve pronto.</p>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(p => `
+    <a href="/blog/posts/${p.slug}.html" class="post-card">
+      <div class="post-meta">📅 ${new Date(p.date+'T12:00:00').toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'})}</div>
+      <div class="post-title">${p.title}</div>
+      <div class="post-excerpt">${p.excerpt}</div>
+      <div class="post-tags">${p.tags.map(t=>`<span>${TAG_LABEL[t]||t}</span>`).join('')}</div>
+      <div class="post-more">Leer artículo →</div>
+    </a>
+  `).join('');
+}
+
+renderFilterBar();
+renderPosts();
+</script>
+</body>
+</html>
