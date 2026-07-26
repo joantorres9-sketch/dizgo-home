@@ -8,7 +8,6 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305080F'/%3E%3Crect x='8' y='8' width='48' height='48' rx='11' fill='%23E8A020'/%3E%3Ctext x='32' y='44' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='32' text-anchor='middle' fill='%230A0D14'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{--bg:#05080F;--s1:#0C1120;--s2:#121929;--s3:#1A2235;--b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.11);--gold:#E8A020;--gold2:#FFB93E;--red:#D94040;--red2:#F05C5C;--blue:#2D7DD2;--blue2:#4A9EF5;--grn:#1E9E6B;--grn2:#2DD4A0;--pur:#9B6BFF;--t1:#EDF0F7;--t2:#8B96A8;--t3:#4A5568;--nav:70px}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -180,6 +179,12 @@ nav.sc{background:rgba(5,8,15,.94);backdrop-filter:blur(20px);box-shadow:0 1px 0
 .chart-card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:20px}
 .chart-title{font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;margin-bottom:4px}
 .chart-sub{font-size:11px;color:var(--t3);margin-bottom:14px}
+.stat-card{background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:18px}
+.stat-val{font-family:'Manrope',sans-serif;font-size:26px;font-weight:800;line-height:1.1;margin-bottom:6px}
+.stat-lbl{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px}
+.stat-src{font-size:10.5px;color:var(--t3);display:flex;align-items:center;gap:5px}
+.stat-src a{color:var(--blue2);text-decoration:none;border-bottom:1px dotted currentColor}
+.stat-src a:hover{color:var(--t1)}
 .chart-wrap{position:relative;height:180px}
 .trends-cases{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .tc{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:20px}
@@ -603,10 +608,11 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
 <section class="sec" id="mundo" style="background:var(--s1)">
   <div class="wrap">
     <div class="sl fu"><span class="tag tb">Pulso Global E-commerce</span></div>
-    <h2 class="h2 fu d1">El comercio digital<br>en tiempo real</h2>
-    <p class="lead fu d2" style="margin-top:12px">DIZGO monitorea tendencias, regulaciones y oportunidades en cada continente. Sé el primero en saber qué viene antes de que llegue.</p>
+    <h2 class="h2 fu d1">El comercio digital,<br>con cifras que puedes verificar</h2>
+    <p class="lead fu d2" style="margin-top:12px">Cada cifra de esta sección viene de una fuente pública citada — Ecommerce Europe, U.S. Department of Commerce, IMARC Group, entre otras. Sin números inventados.</p>
+    <p class="fu d2" style="margin-top:8px;font-size:11.5px;color:var(--t3)" id="pulsoFecha">Última verificación editorial: —</p>
 
-    <div class="ctabs fu d2" style="margin-top:36px">
+    <div class="ctabs fu d2" style="margin-top:28px">
       <button class="ct on" onclick="setCont(this,'latam')">🌎 LATAM</button>
       <button class="ct" onclick="setCont(this,'na')">🇺🇸 Norteamérica</button>
       <button class="ct" onclick="setCont(this,'eu')">🇪🇺 Europa</button>
@@ -614,25 +620,14 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
       <button class="ct" onclick="setCont(this,'africa')">🌍 África</button>
     </div>
 
-    <!-- CHARTS -->
-    <div class="charts-grid fu d2">
-      <div class="chart-card">
-        <div class="chart-title" id="chartTitle1">📈 Crecimiento E-commerce LATAM 2019–2024</div>
-        <div class="chart-sub" id="chartSub1">Volumen de ventas en miles de millones USD</div>
-        <div class="chart-wrap"><canvas id="chart1"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title" id="chartTitle2">📊 Canales de Venta más usados — LATAM 2024</div>
-        <div class="chart-sub" id="chartSub2">% de tiendas activas por canal</div>
-        <div class="chart-wrap"><canvas id="chart2"></canvas></div>
-      </div>
-    </div>
+    <!-- STATS -->
+    <div class="stats-grid fu d2" id="statsZone" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px"></div>
 
     <!-- TRENDS + CASES -->
     <div class="trends-cases fu d3" id="trendsZone"></div>
 
     <div style="text-align:center;margin-top:28px;padding:20px;background:var(--s2);border:1px solid var(--b1);border-radius:14px">
-      <p style="font-size:13px;color:var(--t2);margin-bottom:14px">🤖 Contenido actualizado semanalmente con IA + criterio editorial de Joan Torres. Fuente verificada y aplicable a tu negocio.</p>
+      <p style="font-size:13px;color:var(--t2);margin-bottom:14px">🤖 Investigación y curaduría de Joan Torres, con apoyo de IA para el rastreo de fuentes. Cada cifra enlaza a su fuente original.</p>
       <a href="#comunidad" class="btn bo" style="padding:10px 22px;font-size:13px">Únete y recibe alertas semanales →</a>
     </div>
   </div>
@@ -1005,131 +1000,89 @@ function setF(el, k){
   document.getElementById('sc').innerHTML = screens[k];
 }
 
-// ── CHARTS SETUP ──
-const chartData = {
+// ── PULSO GLOBAL — cifras reales, cada una con su fuente citada ──
+// Investigado y verificado manualmente (búsqueda + lectura de fuentes primarias).
+// Al actualizar, cambia también PULSO_FECHA más abajo.
+const PULSO_FECHA = '25 de julio de 2026';
+const realData = {
   latam: {
-    t1:'📈 Crecimiento E-commerce LATAM 2019–2024', s1:'Volumen en miles de millones USD',
-    t2:'📊 Canales más usados — LATAM 2024', s2:'% de tiendas activas por canal',
-    c1:{labels:['2019','2020','2021','2022','2023','2024'],data:[85,104,131,168,198,242],color:'#E8A020'},
-    c2:{labels:['Instagram Ads','Facebook Ads','WhatsApp','TikTok','Marketplaces','Propia'],data:[72,85,68,44,38,32],color:'#4A9EF5'},
-    trends:[
-      {ico:'📈',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Oportunidad',txt:'TikTok Shop llega a Colombia — primera ola con comisiones al 5%.',imp:'Impacto: ALTO → Ventana de 6 meses',icol:'#2DD4A0'},
-      {ico:'⚖️',bg:'rgba(232,160,32,.1)',col:'#E8A020',tipo:'Regulación',txt:'Colombia exige declaración de origen ICA en productos naturales importados.',imp:'Impacto: MEDIO → Documentación requerida',icol:'#E8A020'},
-      {ico:'⚠️',bg:'rgba(240,92,92,.1)',col:'#F05C5C',tipo:'Riesgo',txt:'Meta Ads suspende sin aviso cuentas de salud sin INVIMA en Colombia.',imp:'Impacto: CRÍTICO → Verificar cumplimiento',icol:'#F05C5C'},
+    stats:[
+      {val:'US$117.000M', lbl:'Ventas retail online en LATAM en 2023, +30% interanual', src:'Infobae / eMarketer', url:'https://www.infobae.com/economia/2024/02/13/e-commerce-america-latina-facturo-usd-117000-millones-en-2023-y-proyectan-que-ese-monto-se-duplicara-en-5-anos/'},
+      {val:'~20%/año', lbl:'Crecimiento proyectado 2024–2027 — el más rápido del mundo, por encima de Asia (7%), EE.UU. (14%) y Europa (12%)', src:'Infobae / eMarketer', url:'https://www.infobae.com/economia/2024/02/13/e-commerce-america-latina-facturo-usd-117000-millones-en-2023-y-proyectan-que-ese-monto-se-duplicara-en-5-anos/'},
+      {val:'~30% + 30%', lbl:'Participación de mercado de Brasil y México, los dos líderes de la región', src:'Infobae / eMarketer', url:'https://www.infobae.com/economia/2024/02/13/e-commerce-america-latina-facturo-usd-117000-millones-en-2023-y-proyectan-que-ese-monto-se-duplicara-en-5-anos/'},
     ],
-    cases:[
-      {type:'ok',lbl:'✅ Caso Exitoso',t:'Gadgets — Medellín',d:'Estructuró costos con DIZGO. Descubrió margen real del 6% (creía 28%). Ajustó precios y llegó a $18M/mes en 4 meses.'},
-      {type:'fail',lbl:'❌ Error Fatal',t:'Ropa — Bogotá',d:'Escaló sin datos. Gastó $40M en pauta con margen negativo. Sin punto de equilibrio. Cerró mes 8.'},
-    ]
+    trends:[
+      {ico:'🚀',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Actualización 2026',txt:'TikTok Shop en Colombia sigue en fase de acceso gradual (sin lanzamiento masivo). Comisiones 5–8% según categoría, frente al 12–15% de Mercado Libre/Amazon. Primeros vendedores facturando $25–50M COP/mes, moda concentra el 60% del volumen.',imp:'Fuente: TikTok Shop Academia, guía 2026',icol:'#2DD4A0',url:'https://tiktokshopacademy.co/blog/tiktok-shop-colombia-guia-2026'},
+    ],
+    cases:[]
   },
   na: {
-    t1:'📈 Crecimiento E-commerce Norteamérica 2019–2024', s1:'Volumen en miles de millones USD',
-    t2:'📊 Plataformas más usadas — NA 2024', s2:'% de vendedores por plataforma',
-    c1:{labels:['2019','2020','2021','2022','2023','2024'],data:[601,791,870,915,1085,1220],color:'#4A9EF5'},
-    c2:{labels:['Amazon','Shopify','eBay','Etsy','TikTok Shop','Propio'],data:[80,62,38,24,18,42],color:'#9B6BFF'},
-    trends:[
-      {ico:'📈',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Oportunidad',txt:'Amazon Marketplace: nichos especializados con menos competencia que en años anteriores.',imp:'Impacto LATAM: ALTO → Modelo de nicho replicable',icol:'#2DD4A0'},
-      {ico:'⚖️',bg:'rgba(232,160,32,.1)',col:'#E8A020',tipo:'Regulación',txt:'FTC exige declarar tiempos de entrega reales. Impacta dropshippers con proveedores en Asia.',imp:'Impacto LATAM: MEDIO → Transparencia en plazos',icol:'#E8A020'},
-      {ico:'🚀',bg:'rgba(74,158,245,.1)',col:'#4A9EF5',tipo:'Tendencia',txt:'Shopify B2B nativo llega a LATAM en 2025. Nueva vertical para dropshippers avanzados.',imp:'Impacto: ALTO → Prepararse ahora',icol:'#4A9EF5'},
+    stats:[
+      {val:'US$1,19 billones', lbl:'Ventas e-commerce en EE.UU. en 2024 — creció 7,5%, más del doble que el retail total (2,6%)', src:'U.S. Dept. of Commerce, vía Digital Commerce 360', url:'https://www.digitalcommerce360.com/2025/03/03/us-ecommerce-sales-2024/'},
+      {val:'16,1%', lbl:'Del total de ventas retail en EE.UU. ya son online (2024)', src:'U.S. Dept. of Commerce, vía Digital Commerce 360', url:'https://www.digitalcommerce360.com/2025/03/03/us-ecommerce-sales-2024/'},
+      {val:'US$316.600M', lbl:'Norteamérica lidera el comercio transfronterizo global, con 40% de cuota (2024)', src:'Reporte de e-commerce cross-border', url:'https://www.yaguara.co/global-ecommerce-sales-growth/'},
     ],
-    cases:[
-      {type:'ok',lbl:'✅ Caso Exitoso',t:'Shopify + TikTok — NY',d:'Tienda de wellness con UGC en TikTok. CPA de $8 USD, ROAS 4.2x. Adaptaron el modelo a Colombia con éxito.'},
-      {type:'fail',lbl:'❌ Error Fatal',t:'Dropshipping China — Miami',d:'Dependencia total de un proveedor chino. Restricciones de importación pararon el negocio en 48h. Cero plan B.'},
-    ]
+    trends:[
+      {ico:'📈',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Dato verificado',txt:'Adobe registró US$240.800M en ventas online solo en la temporada de fin de año 2024 (nov–dic) en EE.UU., un récord.',imp:'Impacto LATAM: la pauta y logística se saturan en esas fechas — planifica inventario con anticipación',icol:'#2DD4A0',url:'https://us.fashionnetwork.com/news/U-s-2024-online-holiday-sales-to-reach-record-240-8-billion-adobe,1667976.html'},
+    ],
+    cases:[]
   },
   eu: {
-    t1:'📈 E-commerce Europa 2019–2024', s1:'Volumen en miles de millones EUR',
-    t2:'📊 Categorías líderes — Europa 2024', s2:'% de ventas por categoría',
-    c1:{labels:['2019','2020','2021','2022','2023','2024'],data:[305,390,465,520,580,641],color:'#2DD4A0'},
-    c2:{labels:['Moda','Electrónica','Hogar','Salud','Alimentos','Otros'],data:[26,22,18,15,11,8],color:'#F05C5C'},
-    trends:[
-      {ico:'⚖️',bg:'rgba(240,92,92,.1)',col:'#F05C5C',tipo:'Regulación Crítica',txt:'DSA (Digital Services Act) activo. Plataformas deben ser transparentes con vendedores.',imp:'Impacto LATAM: ALTO → Cumplimiento para exportar a EU',icol:'#F05C5C'},
-      {ico:'📈',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Oportunidad',txt:'E-commerce sostenible crece 67% en Europa. Margen 40% superior en productos eco-friendly.',imp:'Impacto LATAM: ALTO → Colombia tiene ventaja en naturales',icol:'#2DD4A0'},
+    stats:[
+      {val:'€842.000M', lbl:'Facturación B2C de e-commerce en Europa en 2024, +7% vs. 2023 (€784.000M)', src:'Ecommerce Europe / EuroCommerce — Informe Europeo 2025', url:'https://ecommerce-europe.eu/press-item/new-growth-in-european-e-commerce-indicates-sectors-ability-to-adapt-and-reinvent/'},
+      {val:'+4,6%', lbl:'Crecimiento real 2024, ya descontada la inflación', src:'Ecommerce Europe / EuroCommerce — Informe Europeo 2025', url:'https://ecommerce-europe.eu/press-item/new-growth-in-european-e-commerce-indicates-sectors-ability-to-adapt-and-reinvent/'},
+      {val:'+18%', lbl:'Europa del Este fue la subregión de mayor crecimiento en 2024, hasta €20.000M', src:'Ecommerce Europe / EuroCommerce — Informe Europeo 2025', url:'https://ecommerce-europe.eu/press-item/new-growth-in-european-e-commerce-indicates-sectors-ability-to-adapt-and-reinvent/'},
     ],
-    cases:[
-      {type:'ok',lbl:'✅ Caso Exitoso',t:'Cosmética natural — Colombia a EU',d:'Marca colombiana certificó productos orgánicos y exportó a España. Precio 3x superior al local. Escaló con DM en Instagram.'},
-      {type:'fail',lbl:'❌ Error Fatal',t:'Ropa — Colombia a Alemania',d:'Sin adaptar tallas europeas ni cumplir etiquetado CE. Devoluciones del 62%. Pérdida total en el intento.'},
-    ]
+    trends:[
+      {ico:'⚖️',bg:'rgba(240,92,92,.1)',col:'#F05C5C',tipo:'Regulación activa',txt:'La Digital Services Act (DSA) de la UE ya exige transparencia de las plataformas con sus vendedores.',imp:'Impacto LATAM: si exportas a Europa, revisa cumplimiento antes de listar productos',icol:'#F05C5C'},
+    ],
+    cases:[]
   },
   asia: {
-    t1:'📈 E-commerce Asia-Pacífico 2019–2024', s1:'Volumen en miles de millones USD',
-    t2:'📊 Plataformas líderes — Asia 2024', s2:'% de GMV por plataforma',
-    c1:{labels:['2019','2020','2021','2022','2023','2024'],data:[1500,1990,2480,2910,3420,3980],color:'#9B6BFF'},
-    c2:{labels:['Taobao/Tmall','JD.com','Pinduoduo','Shopee','Lazada','Otros'],data:[35,22,18,12,7,6],color:'#E8A020'},
-    trends:[
-      {ico:'🚀',bg:'rgba(74,158,245,.1)',col:'#4A9EF5',tipo:'Tendencia Global',txt:'Live shopping en China mueve $700B. TikTok Live en LATAM tiene resultados 5x vs e-commerce tradicional.',imp:'Impacto LATAM: ALTO → Adoptar live selling ya',icol:'#4A9EF5'},
-      {ico:'⚠️',bg:'rgba(232,160,32,.1)',col:'#E8A020',tipo:'Riesgo',txt:'Restricciones a Temu y Shein en varios países. Ventana temporal para dropshippers locales.',imp:'Impacto LATAM: MEDIO → Oportunidad de precio local',icol:'#E8A020'},
+    stats:[
+      {val:'>57%', lbl:'Del e-commerce global en ingresos lo genera Asia-Pacífico (2024), impulsado por China', src:'Agregación de datos de mercado 2024–2025 (Craftberry/Netguru)', url:'https://craftberry.co/articles/global-e-commerce-statistics'},
+      {val:'US$3,07 billones', lbl:'Ventas online de China en 2024 — el mercado individual más grande del mundo', src:'Agregación de datos de mercado 2024–2025 (Craftberry/Netguru)', url:'https://craftberry.co/articles/global-e-commerce-statistics'},
     ],
-    cases:[
-      {type:'ok',lbl:'✅ Caso Exitoso',t:'Shopee — Colombia',d:'Dropshipper usó modelo de Shopee Flash Sale adaptado a Meta Ads. Urgencia de 4h duplicó conversión en Colombia.'},
-      {type:'fail',lbl:'❌ Error Fatal',t:'Copiar Alibaba — Perú',d:'Importó masivo sin validar demanda local. Stock empantanado 6 meses. Flujo de caja destruido.'},
-    ]
+    trends:[
+      {ico:'🚀',bg:'rgba(74,158,245,.1)',col:'#4A9EF5',tipo:'Tendencia a vigilar',txt:'El live shopping domina el retail online chino y viene creciendo con fuerza en formatos tipo TikTok Live en otras regiones.',imp:'Impacto LATAM: vale la pena probar formatos de venta en vivo antes que la competencia',icol:'#4A9EF5'},
+    ],
+    cases:[]
   },
   africa: {
-    t1:'📈 E-commerce África 2019–2024', s1:'Volumen en miles de millones USD',
-    t2:'📊 Mercados líderes — África 2024', s2:'% de penetración por país',
-    c1:{labels:['2019','2020','2021','2022','2023','2024'],data:[16,22,28,35,44,58],color:'#2DD4A0'},
-    c2:{labels:['Nigeria','Sudáfrica','Kenia','Egipto','Ghana','Otros'],data:[28,22,18,14,10,8],color:'#E8A020'},
-    trends:[
-      {ico:'📈',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Mercado Emergente',txt:'E-commerce África crece 25% anual. Mobile-first absoluto — lección para mercados rurales LATAM.',imp:'Impacto LATAM: MEDIO → Modelo M-Pesa adaptable a Nequi rural',icol:'#2DD4A0'},
-      {ico:'🚀',bg:'rgba(74,158,245,.1)',col:'#4A9EF5',tipo:'Lección',txt:'Jumia fracasó con modelo occidental. Éxito llegó adaptando logística a infraestructura real.',imp:'Impacto LATAM: LECCIÓN → Adaptar a realidad local',icol:'#4A9EF5'},
+    stats:[
+      {val:'US$317.000M', lbl:'Tamaño del mercado e-commerce africano en 2024', src:'IMARC Group', url:'https://www.imarcgroup.com/africa-e-commerce-market'},
+      {val:'13,8%/año', lbl:'Crecimiento proyectado (CAGR) 2025–2033, hasta US$1,02 billones', src:'IMARC Group', url:'https://www.imarcgroup.com/africa-e-commerce-market'},
+      {val:'Nigeria, Kenia, Sudáfrica, Egipto', lbl:'Los 4 mercados que concentran el crecimiento del continente', src:'IMARC Group', url:'https://www.imarcgroup.com/africa-e-commerce-market'},
     ],
-    cases:[
-      {type:'ok',lbl:'✅ Caso Exitoso',t:'M-Pesa + E-commerce — Kenia',d:'Pagos móviles sin banco transformaron el e-commerce keniano. Modelo replicado en LATAM con Nequi y Daviplata.'},
-      {type:'fail',lbl:'❌ Error Fatal',t:'Jumia — Expansión masiva',d:'Quemó $400M intentando ser el Amazon de África sin adaptar logística. Lección: el modelo occidental no se trasplanta directo.'},
-    ]
+    trends:[
+      {ico:'📱',bg:'rgba(45,212,160,.1)',col:'#2DD4A0',tipo:'Lección aplicable',txt:'El comercio social africano crece ~27% anual, apalancado en pagos móviles (M-Pesa) sin depender de bancos tradicionales.',imp:'Impacto LATAM: modelo directamente comparable a Nequi/Daviplata en zonas rurales',icol:'#2DD4A0',url:'https://finance.yahoo.com/news/africa-social-commerce-market-databook-085900828.html'},
+    ],
+    cases:[]
   }
 };
 
-let charts = {};
 function renderCharts(key) {
-  const d = chartData[key];
-  document.getElementById('chartTitle1').textContent = d.t1;
-  document.getElementById('chartSub1').textContent = d.s1;
-  document.getElementById('chartTitle2').textContent = d.t2;
-  document.getElementById('chartSub2').textContent = d.s2;
+  const d = realData[key];
 
-  if(charts.c1) charts.c1.destroy();
-  if(charts.c2) charts.c2.destroy();
+  const sz = document.getElementById('statsZone');
+  sz.innerHTML = d.stats.map(s=>`<div class="stat-card">
+    <div class="stat-val" style="color:var(--gold)">${s.val}</div>
+    <div class="stat-lbl">${s.lbl}</div>
+    <div class="stat-src">📎 <a href="${s.url}" target="_blank" rel="noopener">${s.src}</a></div>
+  </div>`).join('');
 
-  const cfg = {
-    plugins:{legend:{display:false}},
-    scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#4A5568',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#4A5568',font:{size:10}}}},
-    responsive:true,maintainAspectRatio:false
-  };
-
-  charts.c1 = new Chart(document.getElementById('chart1').getContext('2d'),{
-    type:'line',
-    data:{labels:d.c1.labels,datasets:[{data:d.c1.data,borderColor:d.c1.color,backgroundColor:d.c1.color+'22',fill:true,tension:.4,pointBackgroundColor:d.c1.color,pointRadius:4,borderWidth:2}]},
-    options:{...cfg}
-  });
-
-  charts.c2 = new Chart(document.getElementById('chart2').getContext('2d'),{
-    type:'bar',
-    data:{labels:d.c2.labels,datasets:[{data:d.c2.data,backgroundColor:d.c2.color+'99',borderColor:d.c2.color,borderWidth:1,borderRadius:4}]},
-    options:{...cfg}
-  });
-
-  // Render trends + cases
   const tz = document.getElementById('trendsZone');
-  tz.innerHTML = `<div class="tc">
-    <h4>📡 Tendencias & Regulaciones</h4>
-    ${d.trends.map(t=>`<div class="tr-item">
+  const trendsHtml = d.trends.map(t=>`<div class="tr-item">
       <div class="tr-ico" style="background:${t.bg}">${t.ico}</div>
       <div>
         <div class="tr-type" style="color:${t.col}">${t.tipo}</div>
         <div class="tr-txt">${t.txt}</div>
-        <div class="tr-imp" style="color:${t.icol}">${t.imp}</div>
+        <div class="tr-imp" style="color:${t.icol}">${t.imp}${t.url?` · <a href="${t.url}" target="_blank" rel="noopener" style="color:inherit">Ver fuente ↗</a>`:''}</div>
       </div>
-    </div>`).join('')}
-  </div>
-  <div class="tc">
-    <h4>📊 Casos de Estudio</h4>
-    ${d.cases.map(c=>`<div class="case ${c.type}">
-      <div class="case-lbl" style="color:${c.type==='ok'?'var(--grn2)':'var(--red2)'}">${c.lbl}</div>
-      <div class="case-t">${c.t}</div>
-      <div class="case-d">${c.d}</div>
-    </div>`).join('')}
+    </div>`).join('');
+  tz.innerHTML = `<div class="tc" style="max-width:640px;margin:0 auto">
+    <h4>📡 Actualización reciente</h4>
+    ${trendsHtml}
   </div>`;
 }
 function setCont(el, key) {
@@ -1137,6 +1090,7 @@ function setCont(el, key) {
   el.classList.add('on');
   renderCharts(key);
 }
+document.getElementById('pulsoFecha').textContent = 'Última verificación editorial: ' + PULSO_FECHA;
 setTimeout(()=>renderCharts('latam'), 300);
 
 // ── DIAGNÓSTICO ──
