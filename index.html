@@ -644,6 +644,24 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
     <!-- TRENDS + CASES -->
     <div class="trends-cases fu d3" id="trendsZone"></div>
 
+    <!-- GIGANTES DEL E-COMMERCE (mundo y región, siempre visible) -->
+    <div class="fu d3" style="margin-top:36px;padding-top:32px;border-top:1px solid var(--b1)">
+      <div class="sl"><span class="tag tp">Mundo & Región</span></div>
+      <h3 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">🏆 Los gigantes del e-commerce</h3>
+      <p style="font-size:13px;color:var(--t2);margin-bottom:20px;max-width:600px">Por GMV (volumen de mercancía transaccionado) — para que sepas contra quién compites de verdad, y a quién le puedes vender también.</p>
+      <div class="chart-card">
+        <div class="chart-title">📊 GMV 2024 — miles de millones USD</div>
+        <div class="chart-sub">Alibaba domina el mundo; MercadoLibre domina LATAM</div>
+        <div class="chart-wrap" style="height:200px"><canvas id="chartGigantes"></canvas></div>
+      </div>
+      <div id="gigantesStats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:14px"></div>
+
+      <div style="margin-top:22px;background:linear-gradient(135deg,rgba(240,92,92,.09),rgba(232,160,32,.05));border:1px solid rgba(240,92,92,.25);border-radius:14px;padding:20px 22px">
+        <h4 style="color:var(--red2);font-size:12px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">⚠️ Los disruptores que sí debes vigilar: Shein & Temu</h4>
+        <p id="disruptoresText" style="font-size:13.5px;color:var(--t1);line-height:1.75;margin:0"></p>
+      </div>
+    </div>
+
     <div style="text-align:center;margin-top:28px;padding:20px;background:var(--s2);border:1px solid var(--b1);border-radius:14px">
       <p style="font-size:13px;color:var(--t2);margin-bottom:14px">🤖 Investigación y curaduría de Joan Torres, con apoyo de IA para el rastreo de fuentes. Cada cifra enlaza a su fuente original.</p>
       <a href="#comunidad" class="btn bo" style="padding:10px 22px;font-size:13px">Únete y recibe alertas semanales →</a>
@@ -1235,6 +1253,44 @@ function setCont(el, key) {
 }
 document.getElementById('pulsoFecha').textContent = 'Última verificación editorial: ' + PULSO_FECHA;
 setTimeout(()=>renderCharts('latam'), 300);
+
+// ── LOS GIGANTES DEL E-COMMERCE (mundo y región) ──
+const GIGANTES = [
+  {nombre:'Alibaba (Taobao+Tmall)', gmv:1406.5, detalle:'El marketplace más grande del mundo por GMV', src:'Oberlo / ECDB, estim. 2024', url:'https://www.oberlo.com/statistics/top-online-marketplaces-worldwide-by-gmv', color:'#F05C5C'},
+  {nombre:'Amazon', gmv:435.7, detalle:'La operación más diversificada globalmente', src:'Oberlo / ECDB, estim. 2024', url:'https://www.oberlo.com/statistics/top-online-marketplaces-worldwide-by-gmv', color:'#4A9EF5'},
+  {nombre:'MercadoLibre', gmv:51.5, detalle:'Líder de LATAM — +15% interanual, 100M+ compradores únicos', src:'Resultados financieros oficiales MercadoLibre', url:'https://news.mercadolibre.com/en/financial-results-fourth-quarter-2024', color:'#E8A020'},
+];
+
+new Chart(document.getElementById('chartGigantes').getContext('2d'), {
+  type:'bar',
+  data:{
+    labels: GIGANTES.map(g=>g.nombre),
+    datasets:[{ data: GIGANTES.map(g=>g.gmv), backgroundColor: GIGANTES.map(g=>g.color+'BB'), borderColor: GIGANTES.map(g=>g.color), borderWidth:1, borderRadius:6 }]
+  },
+  options:{
+    indexAxis:'y',
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:c=>`US$${c.parsed.x.toLocaleString('es-CO')} mil millones GMV` } } },
+    scales:{
+      x:{ grid:{color:'rgba(255,255,255,.06)'}, ticks:{color:'#8B96A8',font:{size:10}, callback:v=>'$'+v} },
+      y:{ grid:{display:false}, ticks:{color:'#8B96A8',font:{size:11}} }
+    },
+    responsive:true, maintainAspectRatio:false
+  }
+});
+
+document.getElementById('gigantesStats').innerHTML = GIGANTES.map(g=>`<div class="stat-card">
+  <div class="stat-val" style="color:${g.color}">US$${g.gmv.toLocaleString('es-CO')}B</div>
+  <div class="stat-lbl">${g.nombre} — ${g.detalle}</div>
+  <div class="stat-src">📎 <a href="${g.url}" target="_blank" rel="noopener">${g.src}</a></div>
+</div>`).join('');
+
+document.getElementById('disruptoresText').innerHTML =
+  `<strong>Temu</strong> creció a 105 millones de usuarios activos mensuales en LATAM en el primer semestre de 2025 (+143% interanual) — ` +
+  `en <strong>México ya supera a MercadoLibre en tráfico web</strong> (15,98% vs. 15,16%). ` +
+  `<strong>Shein</strong> pasó los 30 millones de usuarios activos en 2024 (+53%). ` +
+  `En <strong>Colombia</strong>, el 68% de los compradores de 16 a 30 años ya compró o considera comprar en alguna de las dos, y entraron 77 millones de paquetes en 2025 — ` +
+  `mientras las exportaciones textiles locales caían 5,8%. ` +
+  `<span style="color:var(--t3);font-size:12px">Fuentes: Marketing4ecommerce México, El Tiempo/Portafolio.co, cobertura regional Merca20.</span>`;
 
 // ── DIAGNÓSTICO ──
 let scores=[], cq=1;

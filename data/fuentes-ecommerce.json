@@ -1,6 +1,6 @@
 {
   "_nota": "Catálogo interno de fuentes de datos de e-commerce por país. Se actualiza a mano cuando se investiga una fuente nueva o se refresca una cifra. 'estado' indica qué tan investigada está cada fuente: 'verificada' = se extrajeron cifras reales y confirmadas; 'identificada' = se sabe que existe y qué publica, faltan cifras específicas; 'pendiente' = solo listada, sin investigar todavía.",
-  "ultima_actualizacion": "2026-07-28",
+  "ultima_actualizacion": "2026-07-29",
   "paises": {
     "COL": {
       "nombre": "Colombia",
@@ -217,6 +217,22 @@
     "PER": "De minimis US$200 (exento). US$200-2.000: 24% total (4% arancel + IGV). Personas naturales: máx. 3 compras/año, US$1.000 total."
   },
 
+  "gigantes_ecommerce": {
+    "_nota": "GMV = Volumen Bruto de Mercancía (Gross Merchandise Value), la métrica estándar para comparar marketplaces. Cifras de Alibaba y Amazon son estimaciones de terceros (Statista/ECDB/Oberlo) sobre datos 2024; MercadoLibre viene de sus propios resultados financieros (fuente primaria, más confiable).",
+    "mundo": [
+      {"nombre": "Alibaba (Taobao + Tmall)", "gmvUsdB": 1406.5, "detalle": "Taobao US$723.8B + Tmall US$682.7B — el marketplace más grande del mundo por GMV", "src": "Oberlo / ECDB, estimaciones 2024", "url": "https://www.oberlo.com/statistics/top-online-marketplaces-worldwide-by-gmv"},
+      {"nombre": "Amazon", "gmvUsdB": 435.7, "detalle": "GMV pronosticado 2024 — la operación más diversificada globalmente, aunque menor que Alibaba", "src": "Oberlo / ECDB, estimaciones 2024", "url": "https://www.oberlo.com/statistics/top-online-marketplaces-worldwide-by-gmv"},
+      {"nombre": "MercadoLibre", "gmvUsdB": 51.5, "detalle": "Líder indiscutible de LATAM — GMV 2024 +15% interanual, 100M+ compradores únicos (LTM)", "src": "Resultados financieros oficiales MercadoLibre / SEC Form 8-K", "url": "https://news.mercadolibre.com/en/financial-results-fourth-quarter-2024"}
+    ],
+    "disruptores_latam": {
+      "_nota": "Shein y Temu no publican GMV por país de forma comparable a un marketplace tradicional -- se miden mejor en usuarios activos y participación de tráfico, que es lo que de verdad les importa a los vendedores de LATAM ahora mismo.",
+      "temu": {"usuariosActivosLatamM": 105, "crecimientoYoY": "+143%", "periodo": "1S 2025", "src": "Cobertura de prensa regional (merca20/agregadores)", "url": "https://www.merca20.com/shein-y-temu-en-2025-un-ano-de-contrastes-del-boom-al-muro-de-los-aranceles/"},
+      "shein": {"usuariosActivosLatamM": 30, "crecimientoYoY": "+53%", "periodo": "2024", "src": "Cobertura de prensa regional", "url": "https://www.merca20.com/shein-y-temu-en-2025-un-ano-de-contrastes-del-boom-al-muro-de-los-aranceles/"},
+      "mexico_alerta": "Temu ya tiene 15.98% del tráfico web de e-commerce en México, superando a MercadoLibre (15.16%). Fuente: Marketing4ecommerce México, https://marketing4ecommerce.mx/temu-trafico-web-en-mexico/",
+      "colombia_alerta": "68% de consumidores colombianos de 16-30 años ya compró o considera comprar en Shein/Temu (Raddar CKG, 1T 2025). 77 millones de paquetes entraron a Colombia en 2025 -- ~2 paquetes/año por colombiano. Exportaciones textiles cayeron 5.8% en valor mientras las importaciones subieron 22%. Fuente: El Tiempo / Portafolio.co, https://www.eltiempo.com/economia/empresas/asi-golpean-shein-y-temu-a-la-industria-de-la-moda-en-colombia-cambio-en-las-reglas-de-juego-enciende-alertas-advierte-inexmoda-3510260"
+    }
+  },
+
   "plataformas_globales": [
     {
       "nombre": "Shopify",
@@ -241,7 +257,6 @@
     "temas culturales, festividades, estilo de vida por ciudad",
     "orden público y su impacto en logística",
     "conexión a internet / penetración digital por país y ciudad",
-    "los gigantes del comercio electrónico global y regional (Amazon, MercadoLibre, Shein, Temu, etc.) comparados",
     "drill-down a nivel ciudad/estado/provincia dentro de cada país (ej. Quito, departamentos de Perú)"
   ]
 }
