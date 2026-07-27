@@ -74,6 +74,10 @@ a{text-decoration:none;color:inherit}
 #bannerClose{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--t3);font-size:18px;cursor:pointer;line-height:1}
 #bannerClose:hover{color:var(--t1)}
 
+/* ─── PAÍS DEL VISITANTE (precios) ─── */
+.price-local{display:inline-flex;align-items:center;gap:5px;background:rgba(45,212,160,.1);border:1px solid rgba(45,212,160,.28);color:var(--grn2);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:20px;margin-top:8px}
+.paisDropdownSelect{background:var(--s2);border:1px solid var(--b2);color:var(--t1);font-size:12px;border-radius:8px;padding:6px 10px;cursor:pointer}
+
 /* ══════════════════════════════
    NAVBAR
 ══════════════════════════════ */
@@ -864,6 +868,13 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
     <div class="sl fu"><span class="tag tg">Planes DIZGO</span></div>
     <h2 class="h2 fu d1" style="text-align:center">Elige tu plan y empieza<br>a encontrar tu dinero</h2>
     <p class="lead fu d2" style="text-align:center;margin:12px auto 0">Sin contratos · Sin compromisos · Cancela cuando quieras</p>
+    <div class="fu d2" style="text-align:center;margin:16px auto 0;font-size:12.5px;color:var(--t2)">
+      📍 Estás navegando con ubicación de <strong id="paisAvisoNombre" style="color:var(--t1)">Colombia</strong>
+      <button onclick="togglePaisDropdown()" style="background:none;border:none;color:var(--gold);text-decoration:underline;cursor:pointer;font-size:12.5px;margin-left:4px;font-family:inherit">Cambiar</button>
+      <div id="paisDropdownWrap" style="display:none;margin-top:10px">
+        <select class="paisDropdownSelect" onchange="cambiarPaisVisitante(this.value)"></select>
+      </div>
+    </div>
     <div class="pg">
       <div class="pc fu d1">
         <div class="pn">Explorador</div>
@@ -882,8 +893,9 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
       <div class="pc feat fu d2">
         <div class="pbdg">⭐ MÁS POPULAR</div>
         <div class="pn" style="color:var(--gold)">Emprendedor</div>
-        <div class="pv">$89.000 <span style="font-size:16px;color:var(--t2)">COP</span></div>
-        <div class="pper">por mes · ~$22 USD</div>
+        <div class="pv" id="precioEmprendedorUSD">~$22 <span style="font-size:16px;color:var(--t2)">USD</span></div>
+        <div class="pper">por mes</div>
+        <div class="price-local" id="precioEmprendedorLocal">🇨🇴 $89.000 COP</div>
         <div class="pf"><span class="pfc">✓</span>Todo lo de Explorador</div>
         <div class="pf"><span class="pfc">✓</span>1 tienda completa (todos los módulos)</div>
         <div class="pf"><span class="pfc">✓</span>Academia completa (6 módulos)</div>
@@ -896,8 +908,9 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
       </div>
       <div class="pc fu d3">
         <div class="pn">Empresarial</div>
-        <div class="pv">$249.000 <span style="font-size:16px;color:var(--t2)">COP</span></div>
-        <div class="pper">por mes · ~$60 USD</div>
+        <div class="pv" id="precioEmpresarialUSD">~$62 <span style="font-size:16px;color:var(--t2)">USD</span></div>
+        <div class="pper">por mes</div>
+        <div class="price-local" id="precioEmpresarialLocal">🇨🇴 $249.000 COP</div>
         <div class="pf"><span class="pfc">✓</span>Todo lo de Emprendedor</div>
         <div class="pf"><span class="pfc">✓</span>Hasta 5 tiendas simultáneas</div>
         <div class="pf"><span class="pfc">✓</span>Usuarios ilimitados + roles</div>
@@ -992,6 +1005,92 @@ document.getElementById('bannerClose').addEventListener('click', () => {
 
 // ── MOBILE MENU ──
 function toggleMM(){ document.getElementById('mm').classList.toggle('open'); }
+
+// ── PAÍS / MONEDA DEL VISITANTE (detección por IP, no pide permiso de ubicación) ──
+// Los precios reales se cobran en COP (Stripe/Wompi) — esto solo cambia cómo se MUESTRAN,
+// para que un visitante en México vea el valor en USD (más "portable") con un badge de
+// referencia en pesos mexicanos, en vez de forzarlo a pensar en pesos colombianos.
+const PAISES_MONEDA = {
+  COL:{ nombre:'Colombia',    bandera:'🇨🇴', moneda:'COP', locale:'es-CO', decimales:0, usdAprox:4000 },
+  ECU:{ nombre:'Ecuador',     bandera:'🇪🇨', moneda:'USD', locale:'en-US', decimales:2, usdAprox:1 },
+  MEX:{ nombre:'México',      bandera:'🇲🇽', moneda:'MXN', locale:'es-MX', decimales:2, usdAprox:17 },
+  PER:{ nombre:'Perú',        bandera:'🇵🇪', moneda:'PEN', locale:'es-PE', decimales:2, usdAprox:3.7 },
+  CHL:{ nombre:'Chile',       bandera:'🇨🇱', moneda:'CLP', locale:'es-CL', decimales:0, usdAprox:950 },
+  ARG:{ nombre:'Argentina',   bandera:'🇦🇷', moneda:'ARS', locale:'es-AR', decimales:0, usdAprox:1200 },
+  CRI:{ nombre:'Costa Rica',  bandera:'🇨🇷', moneda:'CRC', locale:'es-CR', decimales:0, usdAprox:520 },
+  PRY:{ nombre:'Paraguay',    bandera:'🇵🇾', moneda:'PYG', locale:'es-PY', decimales:0, usdAprox:7300 },
+  VEN:{ nombre:'Venezuela',   bandera:'🇻🇪', moneda:'VES', locale:'es-VE', decimales:2, usdAprox:0 },
+  ESP:{ nombre:'España',      bandera:'🇪🇸', moneda:'EUR', locale:'es-ES', decimales:2, usdAprox:.92 },
+  GTM:{ nombre:'Guatemala',   bandera:'🇬🇹', moneda:'GTQ', locale:'es-GT', decimales:2, usdAprox:7.8 },
+  PAN:{ nombre:'Panamá',      bandera:'🇵🇦', moneda:'USD', locale:'en-US', decimales:2, usdAprox:1 },
+};
+const ISO_A_CODE_HOME = { CO:'COL',EC:'ECU',MX:'MEX',PE:'PER',CL:'CHL',AR:'ARG',CR:'CRI',PY:'PRY',VE:'VEN',ES:'ESP',GT:'GTM',PA:'PAN' };
+const PRECIO_BASE_COP = { emprendedor:89000, empresarial:249000 };
+let paisVisitante = 'COL';
+
+function formatMonedaHome(valor, code){
+  const p = PAISES_MONEDA[code] || PAISES_MONEDA.COL;
+  const s = new Intl.NumberFormat(p.locale,{style:'currency',currency:p.moneda,minimumFractionDigits:p.decimales,maximumFractionDigits:p.decimales}).format(valor);
+  const m = s.match(/^([\d.,\s]+)\s*([^\d\s]+)$/); // símbolo al final (ej. es-ES) -> moverlo al inicio
+  return m ? `${m[2]} ${m[1]}` : s;
+}
+function copAUsd(valorCOP){ return valorCOP / PAISES_MONEDA.COL.usdAprox; }
+function copAMonedaLocal(valorCOP, code){
+  const p = PAISES_MONEDA[code] || PAISES_MONEDA.COL;
+  if(!p.usdAprox) return null; // sin tasa confiable (ej. hiperinflación) -> no se muestra conversión
+  return copAUsd(valorCOP) * p.usdAprox;
+}
+
+function actualizarPreciosMoneda(){
+  const p = PAISES_MONEDA[paisVisitante] || PAISES_MONEDA.COL;
+  const nombreEl = document.getElementById('paisAvisoNombre');
+  if(nombreEl) nombreEl.textContent = p.nombre;
+  document.querySelectorAll('.paisDropdownSelect').forEach(s => { s.value = paisVisitante; });
+
+  ['emprendedor','empresarial'].forEach(plan=>{
+    const cop = PRECIO_BASE_COP[plan];
+    const usd = copAUsd(cop);
+    const cap = plan.charAt(0).toUpperCase()+plan.slice(1);
+    const usdEl = document.getElementById('precio'+cap+'USD');
+    const localEl = document.getElementById('precio'+cap+'Local');
+    if(usdEl) usdEl.innerHTML = `~$${Math.round(usd)} <span style="font-size:16px;color:var(--t2)">USD</span>`;
+    if(localEl){
+      if(p.moneda === 'USD'){
+        localEl.style.display = 'none';
+      } else {
+        const localVal = copAMonedaLocal(cop, paisVisitante);
+        localEl.style.display = 'inline-flex';
+        localEl.textContent = localVal !== null ? `${p.bandera} ${formatMonedaHome(localVal, paisVisitante)}` : `${p.bandera} Referencia en ${p.moneda} al pagar`;
+      }
+    }
+  });
+}
+
+function cambiarPaisVisitante(code){
+  if(!PAISES_MONEDA[code]) return;
+  paisVisitante = code;
+  localStorage.setItem('dizgo_pais_visitante', code);
+  actualizarPreciosMoneda();
+  document.getElementById('paisDropdownWrap').style.display = 'none';
+}
+
+function togglePaisDropdown(){
+  const w = document.getElementById('paisDropdownWrap');
+  w.style.display = w.style.display === 'none' ? 'block' : 'none';
+}
+
+(function initPaisVisitante(){
+  const opciones = Object.entries(PAISES_MONEDA).map(([code,p])=>`<option value="${code}">${p.bandera} ${p.nombre}</option>`).join('');
+  document.querySelectorAll('.paisDropdownSelect').forEach(s => { s.innerHTML = opciones; });
+  actualizarPreciosMoneda();
+
+  const guardado = localStorage.getItem('dizgo_pais_visitante');
+  if(guardado && PAISES_MONEDA[guardado]){ paisVisitante = guardado; actualizarPreciosMoneda(); return; }
+  fetch('https://ipwho.is/').then(r=>r.json()).then(d=>{
+    const code = d && d.country_code ? ISO_A_CODE_HOME[d.country_code] : null;
+    if(code){ paisVisitante = code; actualizarPreciosMoneda(); }
+  }).catch(()=>{ /* si falla la detección, se queda en Colombia por defecto */ });
+})();
 
 // ── HERO CHART ──
 const hvals = [42,58,71,63,85,92,78];
