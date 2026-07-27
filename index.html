@@ -1027,18 +1027,27 @@ const PAISES_MONEDA = {
 const ISO_A_CODE_HOME = { CO:'COL',EC:'ECU',MX:'MEX',PE:'PER',CL:'CHL',AR:'ARG',CR:'CRI',PY:'PRY',VE:'VEN',ES:'ESP',GT:'GTM',PA:'PAN' };
 const PRECIO_BASE_COP = { emprendedor:89000, empresarial:249000 };
 let paisVisitante = 'COL';
+// Tasas de cambio en vivo (unidades por 1 USD), servidas por app.dizgo.app/api/tasas con caché
+// de 6h en el servidor. Mientras no responda (o si falla), se usa el usdAprox de cada país como
+// respaldo — nunca se deja de mostrar un precio por depender de un tercero.
+let tasasEnVivo = null;
 
+function tasaUsdDe(p){
+  if(tasasEnVivo && tasasEnVivo[p.moneda]) return tasasEnVivo[p.moneda];
+  return p.usdAprox || 0;
+}
 function formatMonedaHome(valor, code){
   const p = PAISES_MONEDA[code] || PAISES_MONEDA.COL;
   const s = new Intl.NumberFormat(p.locale,{style:'currency',currency:p.moneda,minimumFractionDigits:p.decimales,maximumFractionDigits:p.decimales}).format(valor);
   const m = s.match(/^([\d.,\s]+)\s*([^\d\s]+)$/); // símbolo al final (ej. es-ES) -> moverlo al inicio
   return m ? `${m[2]} ${m[1]}` : s;
 }
-function copAUsd(valorCOP){ return valorCOP / PAISES_MONEDA.COL.usdAprox; }
+function copAUsd(valorCOP){ return valorCOP / (tasaUsdDe(PAISES_MONEDA.COL) || 4000); }
 function copAMonedaLocal(valorCOP, code){
   const p = PAISES_MONEDA[code] || PAISES_MONEDA.COL;
-  if(!p.usdAprox) return null; // sin tasa confiable (ej. hiperinflación) -> no se muestra conversión
-  return copAUsd(valorCOP) * p.usdAprox;
+  const tasa = tasaUsdDe(p);
+  if(!tasa) return null; // sin tasa confiable (ej. hiperinflación no cubierta) -> no se muestra conversión
+  return copAUsd(valorCOP) * tasa;
 }
 
 function actualizarPreciosMoneda(){
@@ -1090,6 +1099,25 @@ function togglePaisDropdown(){
     const code = d && d.country_code ? ISO_A_CODE_HOME[d.country_code] : null;
     if(code){ paisVisitante = code; actualizarPreciosMoneda(); }
   }).catch(()=>{ /* si falla la detección, se queda en Colombia por defecto */ });
+})();
+
+(function cargarTasasEnVivo(){
+  const TASAS_CACHE_KEY = 'dizgo_tasas_cache';
+  const TASAS_CACHE_TTL_MS = 6*60*60*1000; // 6 horas, igual que la caché del backend
+  try{
+    const cache = localStorage.getItem(TASAS_CACHE_KEY);
+    if(cache){
+      const { rates, ts } = JSON.parse(cache);
+      if(rates && Date.now()-ts < TASAS_CACHE_TTL_MS){ tasasEnVivo = rates; actualizarPreciosMoneda(); return; }
+    }
+  } catch(e){ /* caché corrupta, se ignora y se refresca */ }
+  fetch('https://app.dizgo.app/api/tasas').then(r=>r.json()).then(d=>{
+    if(d && d.rates){
+      tasasEnVivo = d.rates;
+      localStorage.setItem(TASAS_CACHE_KEY, JSON.stringify({ rates:d.rates, ts:Date.now() }));
+      actualizarPreciosMoneda();
+    }
+  }).catch(()=>{ /* si falla, se queda con el usdAprox de cada país */ });
 })();
 
 // ── HERO CHART ──
