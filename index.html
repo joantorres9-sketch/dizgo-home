@@ -638,6 +638,9 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
     <!-- STATS -->
     <div class="stats-grid fu d2" id="statsZone" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px"></div>
 
+    <!-- LOGÍSTICA & ARANCELES (solo cuando hay país seleccionado) -->
+    <div id="logAranZone" style="display:none;margin-top:20px"></div>
+
     <!-- TRENDS + CASES -->
     <div class="trends-cases fu d3" id="trendsZone"></div>
 
@@ -1031,25 +1034,37 @@ const PAISES_LATAM = {
       {val:'370,5M', lbl:'Transacciones online en Colombia en 2023', src:'Observatorio eCommerce — MinTIC', url:'https://observatorioecommerce.mintic.gov.co/portal/'},
       {val:'+12,5%', lbl:'Crecimiento del valor transaccionado, 2023 vs. 2022', src:'Observatorio eCommerce — MinTIC', url:'https://observatorioecommerce.mintic.gov.co/portal/'},
       {val:'5,3M', lbl:'Micronegocios colombianos analizados en el Informe de Coyuntura (datos DANE)', src:'Cámara Colombiana de Comercio Electrónico (CCCE)', url:'https://ccce.org.co/'},
-    ] },
+    ],
+    logistica:{ lideres:['Inter Rapidísimo','Servientrega','Envía (Colvanes)'], src:'Enviame.io', url:'https://enviame.io/empresas-de-ultima-milla-en-colombia/' },
+    arancel:{ resumen:'De minimis US$200 FOB. Debajo: exento de IVA, solo arancel courier (~10%). Encima: 19% IVA + arancel 0–35% según partida.', destacado:'La Corte Constitucional (Sentencia C-079/2026) tumbó el intento de bajar el umbral — sigue en US$200.', src:'DIAN', url:'https://www.dian.gov.co/' },
+  },
   ECU:{ nombre:'Ecuador', bandera:'🇪🇨', growthPct:22,
     stats:[
       {val:'US$4.618M', lbl:'E-commerce bancarizado en Ecuador en 2024, +22% vs. 2023', src:'CECE + Universidad Espíritu Santo (7ª medición)', url:'https://cece.ec/'},
       {val:'81,1M', lbl:'Transacciones de e-commerce en 2024 (+6,1M vs. 2023)', src:'CECE + UEES', url:'https://cece.ec/'},
       {val:'US$6.500M', lbl:'Proyección de facturación total para 2025', src:'CECE + UEES', url:'https://cece.ec/'},
-    ] },
+    ],
+    logistica:{ lideres:['Servientrega Ecuador','Laar Courier','Speed','Tramaco'], src:'Investigación DIZGO', url:null },
+    arancel:{ resumen:'Courier: arancel FIJO de USD $20 por paquete (reforma 2025). Correo postal: libre de arancel. Límite anual personal: US$1.600.', destacado:'Antes de 2025 el courier no pagaba arancel — ahora sí, plano, sin importar el valor del paquete.', src:'SENAE', url:'https://www.aduana.gob.ec/servicio-al-ciudadano/envios-courier-postal/' },
+  },
   MEX:{ nombre:'México', bandera:'🇲🇽', growthPct:20,
     stats:[
       {val:'$789.700M MXN', lbl:'Venta online minorista en México en 2024, +20% anual', src:'AMVO — Estudio de Venta Online 2025', url:'https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025'},
       {val:'67M+', lbl:'Mexicanos que compran en línea', src:'AMVO', url:'https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025'},
       {val:'69%', lbl:'Del tráfico de e-commerce viene de celular', src:'AMVO', url:'https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025'},
-    ] },
+    ],
+    logistica:{ lideres:['Estafeta','DHL México','FedEx México','99minutos'], src:'Marketing4ecommerce', url:'https://marketing4ecommerce.mx/mejores-empresas-logistica-para-ecommerce-mexico/' },
+    arancel:{ resumen:'De minimis casi eliminado desde ene-2026: 19% arancel + IVA sin importar el monto (países sin TLC). Paquetería simplificada: 33.5% hasta US$2.500/destinatario.', destacado:'El cambio más agresivo de los 4 países — fraccionar envíos para evadirlo ya se considera fraude aduanero.', src:'SAT / DOF', url:'https://blog.cjaduanero.com/reforma-ley-aduanera-2025-mexico/' },
+  },
   PER:{ nombre:'Perú', bandera:'🇵🇪', growthPct:21.2,
     stats:[
       {val:'US$15.600M', lbl:'Movilizados en e-commerce en Perú en 2024, +21,2%', src:'CAPECE — Observatorio Ecommerce', url:'https://www.capece.org.pe/observatorio-ecommerce/'},
       {val:'5,5% del PBI', lbl:'Participación del e-commerce en el PBI peruano (2,4% en 2019)', src:'CAPECE', url:'https://www.capece.org.pe/observatorio-ecommerce/'},
       {val:'18,7M', lbl:'Peruanos que compraron en línea en 2024 (55% de la población)', src:'CAPECE', url:'https://www.capece.org.pe/observatorio-ecommerce/'},
-    ] },
+    ],
+    logistica:{ lideres:['Olva Courier','Chazki','99minutos','Shalom'], src:'Ecommercenews Perú', url:'https://www.ecommercenews.pe/logistica/2025/empresas-de-logistica-ecommerce-peru.html/' },
+    arancel:{ resumen:'De minimis US$200 (exento). Entre US$200–2.000: 24% total (4% arancel + IGV). Envíos courier hasta FOB US$2.000 en despacho simplificado.', destacado:'Personas naturales con DNI: máximo 3 compras al año sin superar US$1.000 en total.', src:'SUNAT', url:'https://www.sunat.gob.pe/orientacionaduanera/despsimpimportacion/index.html' },
+  },
 };
 
 const realData = {
@@ -1155,6 +1170,29 @@ function setPais(code) {
   renderPaisBar();
   renderLatamChart();
   renderStats(code ? PAISES_LATAM[code].stats : realData.latam.stats);
+  renderLogAran(code);
+}
+
+function renderLogAran(code) {
+  const zone = document.getElementById('logAranZone');
+  if (!code) { zone.style.display = 'none'; return; }
+  const p = PAISES_LATAM[code];
+  zone.style.display = 'grid';
+  zone.style.gridTemplateColumns = 'repeat(auto-fit,minmax(280px,1fr))';
+  zone.style.gap = '14px';
+  zone.innerHTML = `
+    <div class="stat-card">
+      <div style="font-size:11px;font-weight:700;color:var(--blue2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">🚚 Logística — ${p.nombre}</div>
+      <div style="font-size:13px;color:var(--t1);line-height:1.8">${p.logistica.lideres.map(l=>`<div>• ${l}</div>`).join('')}</div>
+      <div class="stat-src" style="margin-top:10px">📎 ${p.logistica.url ? `<a href="${p.logistica.url}" target="_blank" rel="noopener">${p.logistica.src}</a>` : p.logistica.src}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📦 Aranceles e importación — ${p.nombre}</div>
+      <div style="font-size:13px;color:var(--t1);line-height:1.7;margin-bottom:8px">${p.arancel.resumen}</div>
+      <div style="font-size:12px;color:var(--gold2);background:rgba(232,160,32,.08);border-radius:8px;padding:8px 10px;margin-bottom:8px">⚡ ${p.arancel.destacado}</div>
+      <div class="stat-src">📎 <a href="${p.arancel.url}" target="_blank" rel="noopener">${p.arancel.src}</a></div>
+    </div>
+  `;
 }
 
 function renderCharts(key) {
@@ -1169,9 +1207,11 @@ function renderCharts(key) {
     renderPaisBar();
     renderLatamChart();
     renderStats(realData.latam.stats);
+    renderLogAran(null);
   } else {
     if (latamChart) { latamChart.destroy(); latamChart = null; }
     renderStats(d.stats);
+    document.getElementById('logAranZone').style.display = 'none';
   }
 
   const tz = document.getElementById('trendsZone');

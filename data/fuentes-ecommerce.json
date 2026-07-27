@@ -1,6 +1,6 @@
 {
   "_nota": "Catálogo interno de fuentes de datos de e-commerce por país. Se actualiza a mano cuando se investiga una fuente nueva o se refresca una cifra. 'estado' indica qué tan investigada está cada fuente: 'verificada' = se extrajeron cifras reales y confirmadas; 'identificada' = se sabe que existe y qué publica, faltan cifras específicas; 'pendiente' = solo listada, sin investigar todavía.",
-  "ultima_actualizacion": "2026-07-27",
+  "ultima_actualizacion": "2026-07-28",
   "paises": {
     "COL": {
       "nombre": "Colombia",
@@ -47,8 +47,15 @@
           "nombre": "DIAN (Dirección de Impuestos y Aduanas Nacionales)",
           "tipo": "Entidad gubernamental — aduanas y aranceles",
           "url": "https://www.dian.gov.co/",
-          "estado": "pendiente",
-          "temas": ["aranceles", "importaciones", "exportaciones", "regulaciones"]
+          "estado": "verificada",
+          "periodicidad": "Cambios por decreto/sentencia, sin ciclo fijo",
+          "temas": ["aranceles", "importaciones", "exportaciones", "regulaciones"],
+          "datos_confirmados": [
+            "De minimis: US$200 FOB (restablecido por Sentencia C-079 de 2026 de la Corte Constitucional, que tumbó el Decreto 1474 de 2025 que buscaba bajarlo)",
+            "Por debajo de US$200: exento de IVA, solo paga el arancel único de la modalidad courier (~10%)",
+            "Por encima de US$200: 19% de IVA + arancel general (0%-35% según subpartida arancelaria)",
+            "Aranceles organizados en el Arancel de Aduanas, códigos de 10 dígitos, administrado por la DIAN"
+          ]
         }
       ]
     },
@@ -75,6 +82,20 @@
           "url": "https://ecommerce.institute/tag/camara-ecuatoriana-de-comercio-electronico-cece/",
           "estado": "identificada",
           "temas": ["marketing", "publicidad", "IA-ecommerce", "casos-reales"]
+        },
+        {
+          "nombre": "SENAE (Servicio Nacional de Aduana del Ecuador)",
+          "tipo": "Entidad gubernamental — aduanas y aranceles",
+          "url": "https://www.aduana.gob.ec/servicio-al-ciudadano/envios-courier-postal/",
+          "estado": "verificada",
+          "periodicidad": "Resoluciones COMEX según necesidad",
+          "temas": ["aranceles", "importaciones", "exportaciones", "regulaciones"],
+          "datos_confirmados": [
+            "Reforma 2025 (Resolución COMEX 006-2025): paquetes por mensajería acelerada/courier (subpartida 9807.10.30.00) pasan de arancel $0 a un arancel FIJO de USD $20 por paquete",
+            "Envío por correo postal (no courier) sigue libre de arancel",
+            "Límite anual de importaciones para uso personal: USD $1.600 por persona",
+            "Régimen conocido como '4x4' — SENAE debe reportar semestralmente a COMEX"
+          ]
         }
       ]
     },
@@ -95,6 +116,22 @@
             "16.6 mil millones de visitas a sitios de e-commerce en 2024",
             "69% del tráfico proviene de dispositivos móviles"
           ]
+        },
+        {
+          "nombre": "SAT / Diario Oficial de la Federación — Reforma a la Ley Aduanera",
+          "tipo": "Entidad gubernamental — aduanas y aranceles",
+          "url": "https://blog.cjaduanero.com/reforma-ley-aduanera-2025-mexico/",
+          "estado": "verificada",
+          "periodicidad": "Reforma publicada 28 jul 2025, vigente desde 1 ene 2026",
+          "temas": ["aranceles", "importaciones", "exportaciones", "regulaciones"],
+          "datos_confirmados": [
+            "Régimen de minimis prácticamente eliminado: importaciones desde países sin acuerdo comercial pagan 19% de arancel + IVA sin importar el monto",
+            "Tasa del 33.5% sobre mercancías bajo el esquema simplificado de paquetería, vigente desde el 15 de agosto de 2025",
+            "Procedimiento simplificado para mensajería solo si el valor en aduana no excede US$2.500 por destinatario",
+            "Fraccionar envíos para aprovechar el minimis ahora se considera fraude aduanero explícito",
+            "Importaciones bajo el esquema simplificado NO son deducibles para efectos de ISR"
+          ],
+          "nota": "Es el cambio regulatorio más agresivo de los 4 países -- relevante para cualquier dropshipper que importe a México desde fuera de tratados comerciales."
         }
       ]
     },
@@ -115,6 +152,20 @@
             "54% de compradores son mujeres, con mayor frecuencia de compra (3 compras/año en promedio)",
             "US$8.700 millones en el primer semestre de 2025 (+18% vs. 1S 2024)"
           ]
+        },
+        {
+          "nombre": "SUNAT — Despacho Simplificado de Importación",
+          "tipo": "Entidad gubernamental — aduanas y aranceles",
+          "url": "https://www.sunat.gob.pe/orientacionaduanera/despsimpimportacion/index.html",
+          "estado": "verificada",
+          "periodicidad": "Vigente 2025, sin cambios recientes mayores",
+          "temas": ["aranceles", "importaciones", "exportaciones", "regulaciones"],
+          "datos_confirmados": [
+            "De minimis: hasta US$200 exento de arancel e IGV",
+            "Entre US$200 y US$2.000: arancel 4% + IGV -- 24% del valor CIF en total",
+            "Envíos courier admitidos en despacho simplificado hasta FOB US$2.000",
+            "Personas naturales con DNI: máximo 3 compras al año sin superar US$1.000 en total"
+          ]
         }
       ]
     },
@@ -131,6 +182,41 @@
       ]
     }
   },
+  "logistica_por_pais": {
+    "_fuente": "Tiendanube, Ecommercenews Perú, Marketing4ecommerce México, Enviame -- ver 'nota' en cada país para el link específico usado",
+    "COL": {
+      "lideres": ["Inter Rapidísimo", "Servientrega", "Envía (Colvanes)"],
+      "otros": ["Coordinadora", "TCC", "Domina Entrega Total", "Domesa de Colombia"],
+      "nota": "Top 3 por participación 2023 según Tiendanube/Enviame: https://enviame.io/empresas-de-ultima-milla-en-colombia/"
+    },
+    "ECU": {
+      "lideres": ["Servientrega Ecuador", "Laar Courier"],
+      "otros": ["Speed", "Tramaco"],
+      "nota": "Cobertura de búsqueda limitada para Ecuador -- verificar directamente con cada operador, pendiente fuente más específica."
+    },
+    "MEX": {
+      "lideres": ["Estafeta", "DHL México", "FedEx México"],
+      "otros": ["Paquetexpress", "99minutos (entregas same-day/99 min)"],
+      "nota": "https://marketing4ecommerce.mx/mejores-empresas-logistica-para-ecommerce-mexico/"
+    },
+    "PER": {
+      "lideres": ["Olva Courier", "Chazki", "99minutos"],
+      "otros": ["Shalom", "Dinet Ecommerce", "Skynet Perú", "Cruz del Sur"],
+      "nota": "https://www.ecommercenews.pe/logistica/2025/empresas-de-logistica-ecommerce-peru.html/ y https://enviame.io/empresas-de-ultima-milla-en-peru/"
+    },
+    "regional": {
+      "nota": "99minutos y Chazki operan multi-país (Colombia, México, Perú, Chile +otros) -- son los dos operadores 'last mile e-commerce' con mayor huella regional encontrados hasta ahora."
+    }
+  },
+
+  "aranceles_resumen_2026": {
+    "_nota": "Resumen comparativo rápido para vender/importar entre estos 4 países -- cada fila cita su fuente completa arriba en 'paises'.",
+    "COL": "De minimis US$200 FOB. Debajo: exento de IVA, solo arancel courier (~10%). Encima: 19% IVA + arancel 0-35% según partida.",
+    "ECU": "Courier: arancel FIJO de USD $20/paquete (reforma 2025). Correo postal: libre de arancel. Límite anual personal: US$1.600.",
+    "MEX": "De minimis casi eliminado desde ene-2026: 19% arancel + IVA sin importar el monto (países sin TLC). Paquetería simplificada: 33.5% hasta US$2.500/destinatario.",
+    "PER": "De minimis US$200 (exento). US$200-2.000: 24% total (4% arancel + IGV). Personas naturales: máx. 3 compras/año, US$1.000 total."
+  },
+
   "plataformas_globales": [
     {
       "nombre": "Shopify",
@@ -150,8 +236,7 @@
     }
   ],
   "temas_pendientes_de_profundizar": [
-    "logistica (empresas de transporte por país, tiempos, costos)",
-    "aranceles e importaciones/exportaciones por país",
+    "logistica: tiempos de entrega y costos exactos por transportadora (solo se tienen nombres de líderes, falta profundizar cifras)",
     "beneficios y cómo empezar a vender en otro país (cross-border)",
     "temas culturales, festividades, estilo de vida por ciudad",
     "orden público y su impacto en logística",
