@@ -1,0 +1,162 @@
+{
+  "_nota": "Catálogo interno de fuentes de datos de e-commerce por país. Se actualiza a mano cuando se investiga una fuente nueva o se refresca una cifra. 'estado' indica qué tan investigada está cada fuente: 'verificada' = se extrajeron cifras reales y confirmadas; 'identificada' = se sabe que existe y qué publica, faltan cifras específicas; 'pendiente' = solo listada, sin investigar todavía.",
+  "ultima_actualizacion": "2026-07-27",
+  "paises": {
+    "COL": {
+      "nombre": "Colombia",
+      "fuentes": [
+        {
+          "nombre": "Observatorio de eCommerce — MinTIC",
+          "tipo": "Entidad gubernamental (Ministerio TIC)",
+          "url": "https://observatorioecommerce.mintic.gov.co/portal/",
+          "estado": "verificada",
+          "periodicidad": "Anual, con dashboards actualizados",
+          "temas": ["finanzas", "transacciones", "normatividad", "regulaciones", "regiones-ciudades"],
+          "datos_confirmados": [
+            "370.5 millones de transacciones online en 2023",
+            "Crecimiento mensual promedio 1.5% en 2023",
+            "Crecimiento interanual ~12.5% (2023 vs 2022, calculado sobre cifras propias de la fuente)",
+            "Sección 'e-Commerce por regiones 2020-2021' con desglose regional",
+            "Marco normativo: leyes, decretos, resoluciones"
+          ],
+          "nota": "La página muestra 'Ventas en Línea Anuales 2023: $62.1 B' sin especificar explícitamente si es COP o USD -- no se publica esa cifra en el sitio hasta confirmar la unidad con una fuente adicional."
+        },
+        {
+          "nombre": "Cámara Colombiana de Comercio Electrónico (CCCE)",
+          "tipo": "Gremio / cámara de comercio electrónico",
+          "url": "https://ccce.org.co/",
+          "estado": "verificada",
+          "periodicidad": "Informe de Coyuntura periódico + noticias continuas",
+          "temas": ["productos", "marketing", "finanzas", "importaciones-exportaciones"],
+          "datos_confirmados": [
+            "5.3 millones de micronegocios colombianos analizados (con datos DANE)",
+            "59% de compradores globales hacen compras internacionales",
+            "Índices de madurez digital propios: IATIC, IID, ISD, ICMD"
+          ]
+        },
+        {
+          "nombre": "DANE (Departamento Administrativo Nacional de Estadística)",
+          "tipo": "Entidad gubernamental de estadística",
+          "url": "https://www.dane.gov.co/",
+          "estado": "identificada",
+          "periodicidad": "Por confirmar",
+          "temas": ["finanzas", "sectores", "productos"],
+          "nota": "Fuente de datos citada por la CCCE en su Informe de Coyuntura -- pendiente investigar directamente."
+        },
+        {
+          "nombre": "DIAN (Dirección de Impuestos y Aduanas Nacionales)",
+          "tipo": "Entidad gubernamental — aduanas y aranceles",
+          "url": "https://www.dian.gov.co/",
+          "estado": "pendiente",
+          "temas": ["aranceles", "importaciones", "exportaciones", "regulaciones"]
+        }
+      ]
+    },
+    "ECU": {
+      "nombre": "Ecuador",
+      "fuentes": [
+        {
+          "nombre": "Cámara Ecuatoriana de Comercio Electrónico (CECE) + Universidad Espíritu Santo (UEES)",
+          "tipo": "Gremio + academia — estudio anual conjunto",
+          "url": "https://cece.ec/",
+          "estado": "verificada",
+          "periodicidad": "Anual (7 mediciones publicadas: 2018 a 2024)",
+          "temas": ["finanzas", "transacciones", "productos", "importaciones-exportaciones"],
+          "datos_confirmados": [
+            "USD $4.618 millones en e-commerce bancarizado en 2024, +22% vs 2023",
+            "USD $5.500 millones de facturación total 2024 incluyendo otros medios de pago",
+            "465 millones de transacciones digitales totales en 2024; 81.1 millones específicas de e-commerce (+6.1M vs 2023)",
+            "Proyección 2025: USD $6.500 millones"
+          ]
+        },
+        {
+          "nombre": "E-commerce Institute — cobertura CECE",
+          "tipo": "Medio/observatorio especializado",
+          "url": "https://ecommerce.institute/tag/camara-ecuatoriana-de-comercio-electronico-cece/",
+          "estado": "identificada",
+          "temas": ["marketing", "publicidad", "IA-ecommerce", "casos-reales"]
+        }
+      ]
+    },
+    "MEX": {
+      "nombre": "México",
+      "fuentes": [
+        {
+          "nombre": "Asociación Mexicana de Venta Online (AMVO) — Estudio de Venta Online",
+          "tipo": "Gremio / asociación",
+          "url": "https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025",
+          "estado": "verificada",
+          "periodicidad": "Anual",
+          "temas": ["finanzas", "estilo-de-vida", "conexion-internet", "productos"],
+          "datos_confirmados": [
+            "$789.700 millones de pesos mexicanos (MXN) en venta online minorista 2024, crecimiento >20% anual",
+            "Más de 67 millones de mexicanos compran en línea",
+            "Crecimiento promedio 33% anual entre 2019 y 2024",
+            "16.6 mil millones de visitas a sitios de e-commerce en 2024",
+            "69% del tráfico proviene de dispositivos móviles"
+          ]
+        }
+      ]
+    },
+    "PER": {
+      "nombre": "Perú",
+      "fuentes": [
+        {
+          "nombre": "Cámara Peruana de Comercio Electrónico (CAPECE) — Observatorio Ecommerce",
+          "tipo": "Gremio / cámara de comercio electrónico",
+          "url": "https://www.capece.org.pe/observatorio-ecommerce/",
+          "estado": "verificada",
+          "periodicidad": "Anual + actualizaciones semestrales",
+          "temas": ["finanzas", "sectores", "estilo-de-vida"],
+          "datos_confirmados": [
+            "US$15.600 millones movilizados en 2024, crecimiento 21.2%",
+            "El sector representa 5.5% del PBI peruano (vs. 2.4% en 2019)",
+            "55% de peruanos (18.7 millones de personas) compró en línea en 2024",
+            "54% de compradores son mujeres, con mayor frecuencia de compra (3 compras/año en promedio)",
+            "US$8.700 millones en el primer semestre de 2025 (+18% vs. 1S 2024)"
+          ]
+        }
+      ]
+    },
+    "PAN": {
+      "nombre": "Panamá",
+      "fuentes": [
+        {
+          "nombre": "Por identificar — cámara o gremio de comercio electrónico panameño",
+          "tipo": "Pendiente",
+          "url": null,
+          "estado": "pendiente",
+          "temas": []
+        }
+      ]
+    }
+  },
+  "plataformas_globales": [
+    {
+      "nombre": "Shopify",
+      "tipo": "Plataforma de e-commerce — reportes propios de uso/tendencias",
+      "url": "https://www.shopify.com/",
+      "estado": "identificada",
+      "temas": ["productos", "marketing", "IA-ecommerce", "publicidad"],
+      "nota": "Fuente de datos de USO de la plataforma (no independiente) -- útil para tendencias de producto/checkout, se debe citar como 'según Shopify' explícitamente, no como estadística neutral de mercado."
+    },
+    {
+      "nombre": "WooCommerce",
+      "tipo": "Plataforma de e-commerce (open source, Automattic) — reportes propios",
+      "url": "https://woocommerce.com/es/",
+      "estado": "identificada",
+      "temas": ["productos", "IA-ecommerce"],
+      "nota": "Mismo criterio que Shopify -- fuente de plataforma, no observatorio independiente."
+    }
+  ],
+  "temas_pendientes_de_profundizar": [
+    "logistica (empresas de transporte por país, tiempos, costos)",
+    "aranceles e importaciones/exportaciones por país",
+    "beneficios y cómo empezar a vender en otro país (cross-border)",
+    "temas culturales, festividades, estilo de vida por ciudad",
+    "orden público y su impacto en logística",
+    "conexión a internet / penetración digital por país y ciudad",
+    "los gigantes del comercio electrónico global y regional (Amazon, MercadoLibre, Shein, Temu, etc.) comparados",
+    "drill-down a nivel ciudad/estado/provincia dentro de cada país (ej. Quito, departamentos de Perú)"
+  ]
+}

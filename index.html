@@ -8,6 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305080F'/%3E%3Crect x='8' y='8' width='48' height='48' rx='11' fill='%23E8A020'/%3E%3Ctext x='32' y='44' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='32' text-anchor='middle' fill='%230A0D14'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{--bg:#05080F;--s1:#0C1120;--s2:#121929;--s3:#1A2235;--b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.11);--gold:#E8A020;--gold2:#FFB93E;--red:#D94040;--red2:#F05C5C;--blue:#2D7DD2;--blue2:#4A9EF5;--grn:#1E9E6B;--grn2:#2DD4A0;--pur:#9B6BFF;--t1:#EDF0F7;--t2:#8B96A8;--t3:#4A5568;--nav:70px}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -46,6 +47,8 @@ a{text-decoration:none;color:inherit}
 .bwa:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.42)}
 .br{background:linear-gradient(135deg,var(--red),#8C1A1A);color:#fff}
 .br:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(217,64,64,.4)}
+.bgr{background:linear-gradient(135deg,var(--grn2),#189670);color:#04140E;box-shadow:0 4px 20px rgba(45,212,160,.32)}
+.bgr:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,212,160,.48)}
 
 /* ─── CARD ─── */
 .card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:26px;transition:border-color .25s,transform .25s,box-shadow .25s}
@@ -450,7 +453,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
         <div class="hero-acts fu d3">
           <a href="https://app.dizgo.app" class="btn bapp">🚀 Entrar a la App</a>
           <a href="https://app.dizgo.app" class="btn bac">🎓 Entrar a la Academia</a>
-          <a href="#diagnostico" class="btn bo">📊 Diagnóstico Gratis</a>
+          <a href="#diagnostico" class="btn bgr">📊 Diagnóstico Gratis</a>
         </div>
         <div class="hero-stats fu d4">
           <div><div class="hs-num">13+</div><div class="hs-lbl">Años de experiencia</div></div>
@@ -622,8 +625,18 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
       <button class="ct" onclick="setCont(this,'africa')">🌍 África</button>
     </div>
 
+    <!-- PAÍS (solo LATAM) -->
+    <div id="paisBar" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px"></div>
+
+    <!-- CHART -->
+    <div class="chart-card fu d2" id="chartCard" style="margin-top:20px;display:none">
+      <div class="chart-title" id="chartTitle">📊 Crecimiento e-commerce por país — LATAM 2024</div>
+      <div class="chart-sub" id="chartSub">% de crecimiento interanual, cada país según su propia fuente oficial</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="chartLatam"></canvas></div>
+    </div>
+
     <!-- STATS -->
-    <div class="stats-grid fu d2" id="statsZone" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px"></div>
+    <div class="stats-grid fu d2" id="statsZone" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px"></div>
 
     <!-- TRENDS + CASES -->
     <div class="trends-cases fu d3" id="trendsZone"></div>
@@ -1006,7 +1019,39 @@ function setF(el, k){
 // ── PULSO GLOBAL — cifras reales, cada una con su fuente citada ──
 // Investigado y verificado manualmente (búsqueda + lectura de fuentes primarias).
 // Al actualizar, cambia también PULSO_FECHA más abajo.
-const PULSO_FECHA = '25 de julio de 2026';
+const PULSO_FECHA = '27 de julio de 2026';
+
+// Datos país por país dentro de LATAM — de cámaras/observatorios oficiales de cada país.
+// growthPct se usa en el gráfico comparativo: es un cálculo interno de la propia fuente
+// (delta/base), por eso es seguro compararlo entre países aunque una fuente no aclare
+// si su cifra base está en USD o en moneda local -- el porcentaje no depende de esa unidad.
+const PAISES_LATAM = {
+  COL:{ nombre:'Colombia', bandera:'🇨🇴', growthPct:12.5,
+    stats:[
+      {val:'370,5M', lbl:'Transacciones online en Colombia en 2023', src:'Observatorio eCommerce — MinTIC', url:'https://observatorioecommerce.mintic.gov.co/portal/'},
+      {val:'+12,5%', lbl:'Crecimiento del valor transaccionado, 2023 vs. 2022', src:'Observatorio eCommerce — MinTIC', url:'https://observatorioecommerce.mintic.gov.co/portal/'},
+      {val:'5,3M', lbl:'Micronegocios colombianos analizados en el Informe de Coyuntura (datos DANE)', src:'Cámara Colombiana de Comercio Electrónico (CCCE)', url:'https://ccce.org.co/'},
+    ] },
+  ECU:{ nombre:'Ecuador', bandera:'🇪🇨', growthPct:22,
+    stats:[
+      {val:'US$4.618M', lbl:'E-commerce bancarizado en Ecuador en 2024, +22% vs. 2023', src:'CECE + Universidad Espíritu Santo (7ª medición)', url:'https://cece.ec/'},
+      {val:'81,1M', lbl:'Transacciones de e-commerce en 2024 (+6,1M vs. 2023)', src:'CECE + UEES', url:'https://cece.ec/'},
+      {val:'US$6.500M', lbl:'Proyección de facturación total para 2025', src:'CECE + UEES', url:'https://cece.ec/'},
+    ] },
+  MEX:{ nombre:'México', bandera:'🇲🇽', growthPct:20,
+    stats:[
+      {val:'$789.700M MXN', lbl:'Venta online minorista en México en 2024, +20% anual', src:'AMVO — Estudio de Venta Online 2025', url:'https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025'},
+      {val:'67M+', lbl:'Mexicanos que compran en línea', src:'AMVO', url:'https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025'},
+      {val:'69%', lbl:'Del tráfico de e-commerce viene de celular', src:'AMVO', url:'https://blog.amvo.org.mx/publicaciones/estudio-sobre-venta-online-en-mexico-2025'},
+    ] },
+  PER:{ nombre:'Perú', bandera:'🇵🇪', growthPct:21.2,
+    stats:[
+      {val:'US$15.600M', lbl:'Movilizados en e-commerce en Perú en 2024, +21,2%', src:'CAPECE — Observatorio Ecommerce', url:'https://www.capece.org.pe/observatorio-ecommerce/'},
+      {val:'5,5% del PBI', lbl:'Participación del e-commerce en el PBI peruano (2,4% en 2019)', src:'CAPECE', url:'https://www.capece.org.pe/observatorio-ecommerce/'},
+      {val:'18,7M', lbl:'Peruanos que compraron en línea en 2024 (55% de la población)', src:'CAPECE', url:'https://www.capece.org.pe/observatorio-ecommerce/'},
+    ] },
+};
+
 const realData = {
   latam: {
     stats:[
@@ -1064,15 +1109,70 @@ const realData = {
   }
 };
 
-function renderCharts(key) {
-  const d = realData[key];
-
-  const sz = document.getElementById('statsZone');
-  sz.innerHTML = d.stats.map(s=>`<div class="stat-card">
+function renderStats(stats) {
+  document.getElementById('statsZone').innerHTML = stats.map(s=>`<div class="stat-card">
     <div class="stat-val" style="color:var(--gold)">${s.val}</div>
     <div class="stat-lbl">${s.lbl}</div>
     <div class="stat-src">📎 <a href="${s.url}" target="_blank" rel="noopener">${s.src}</a></div>
   </div>`).join('');
+}
+
+let latamChart = null, paisActivo = null;
+function renderPaisBar() {
+  const bar = document.getElementById('paisBar');
+  const pills = ['<button class="filter-pill '+(paisActivo===null?'on':'')+'" onclick="setPais(null)">🌎 Toda la región</button>']
+    .concat(Object.entries(PAISES_LATAM).map(([code,p]) =>
+      `<button class="filter-pill ${paisActivo===code?'on':''}" onclick="setPais('${code}')">${p.bandera} ${p.nombre}</button>`
+    ));
+  bar.innerHTML = pills.join('');
+}
+function renderLatamChart() {
+  const ctx = document.getElementById('chartLatam').getContext('2d');
+  const entries = Object.entries(PAISES_LATAM);
+  if (latamChart) latamChart.destroy();
+  latamChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: entries.map(([,p])=>p.bandera+' '+p.nombre),
+      datasets: [{
+        data: entries.map(([,p])=>p.growthPct),
+        backgroundColor: entries.map(([code])=> code===paisActivo ? '#E8A020' : 'rgba(232,160,32,.45)'),
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => `+${c.parsed.y}% de crecimiento interanual` } } },
+      scales:{
+        x:{ grid:{display:false}, ticks:{color:'#8B96A8',font:{size:11}} },
+        y:{ grid:{color:'rgba(255,255,255,.06)'}, ticks:{color:'#8B96A8',font:{size:10}, callback:v=>v+'%'} }
+      },
+      responsive:true, maintainAspectRatio:false
+    }
+  });
+}
+function setPais(code) {
+  paisActivo = code;
+  renderPaisBar();
+  renderLatamChart();
+  renderStats(code ? PAISES_LATAM[code].stats : realData.latam.stats);
+}
+
+function renderCharts(key) {
+  const d = realData[key];
+  const esLatam = key === 'latam';
+
+  document.getElementById('paisBar').style.display = esLatam ? 'flex' : 'none';
+  document.getElementById('chartCard').style.display = esLatam ? 'block' : 'none';
+
+  if (esLatam) {
+    paisActivo = null;
+    renderPaisBar();
+    renderLatamChart();
+    renderStats(realData.latam.stats);
+  } else {
+    if (latamChart) { latamChart.destroy(); latamChart = null; }
+    renderStats(d.stats);
+  }
 
   const tz = document.getElementById('trendsZone');
   const trendsHtml = d.trends.map(t=>`<div class="tr-item">
