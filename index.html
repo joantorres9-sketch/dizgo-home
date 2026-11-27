@@ -291,6 +291,52 @@ nav.sc{background:rgba(5,8,15,.94);backdrop-filter:blur(20px);box-shadow:0 1px 0
 .p-opt:hover,.p-opt.on{border-color:var(--grn2);color:var(--grn2)}
 .p-ico{font-size:18px;display:block;margin-bottom:3px}
 .pi{padding:12px;background:rgba(45,212,160,.05);border:1px solid rgba(45,212,160,.13);border-radius:9px;font-size:12px;color:var(--t2)}
+/* ── Agendamiento de asesorías (agenda real contra app.dizgo.app) ── */
+.bk2{background:var(--s1);border:1px solid var(--b2);border-radius:18px;padding:28px;max-width:1000px;margin:0 auto;position:relative}
+.bkgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:30px}
+.bkgrid>div{min-width:0} /* sin esto la tira de días ensancha la columna y rompe el móvil */
+.bstep{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.bstep b{width:20px;height:20px;border-radius:50%;background:rgba(232,160,32,.15);display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+.bt .btd{font-size:10px;color:var(--t3);margin-top:2px}
+.tchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.tchip{padding:7px 11px;border-radius:20px;border:1px solid var(--b2);background:var(--s2);font-size:12px;color:var(--t2);cursor:pointer;transition:all .2s;font-family:inherit}
+.tchip:hover{color:var(--t1)}
+.tchip.on{border-color:var(--gold);color:var(--gold);background:rgba(232,160,32,.08)}
+.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;scrollbar-width:thin}
+.day{flex:0 0 auto;width:62px;padding:8px 0;text-align:center;border-radius:10px;border:1px solid var(--b1);background:var(--s2);cursor:pointer;transition:all .2s;font-family:inherit;color:var(--t1)}
+.day:hover{border-color:var(--b2)}
+.day .dw{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px}
+.day .dn{font-family:'Manrope',sans-serif;font-size:19px;font-weight:800;line-height:1.2}
+.day .dm{font-size:10px;color:var(--t2)}
+.day .dc2{font-size:9px;color:var(--grn2);margin-top:2px}
+.day.on{border-color:var(--gold);background:rgba(232,160,32,.08)}
+.day.on .dn{color:var(--gold)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px;min-height:40px}
+.slot{padding:8px 0;text-align:center;border-radius:8px;border:1px solid var(--b2);background:var(--s2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--t1);transition:all .15s;line-height:1.25}
+.slot small{display:block;font-size:9.5px;font-weight:500;color:var(--t3)}
+.slot:hover{border-color:var(--gold)}
+.slot.on{background:var(--gold);color:#0A0D14;border-color:var(--gold)}
+.slot.on small{color:#3a2a05}
+.tznote{font-size:11.5px;color:var(--t3);margin-top:10px;line-height:1.5}
+.bsum{padding:12px 14px;border-radius:10px;background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.2);font-size:13px;line-height:1.55;color:var(--t2)}
+.bsum strong{color:var(--t1)}
+.bmsg{font-size:12.5px;padding:10px 12px;border-radius:9px;background:rgba(240,92,92,.07);border:1px solid rgba(240,92,92,.22);color:var(--red2);display:none}
+.bmsg.show{display:block}
+.bmsg.info{background:rgba(74,158,245,.07);border-color:rgba(74,158,245,.22);color:var(--blue2)}
+.bchk{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--t2);cursor:pointer}
+.bchk input{accent-color:var(--gold);width:15px;height:15px}
+.skel{height:36px;border-radius:8px;background:linear-gradient(90deg,var(--s2),var(--s3),var(--s2));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.hpot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.bkok{display:none;text-align:center;padding:16px 6px}
+.bkok.show{display:block}
+.bkok .code{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--gold);background:rgba(232,160,32,.08);border:1px dashed rgba(232,160,32,.35);border-radius:8px;padding:6px 14px;margin:10px 0}
+.bkok .acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.bkprep{max-width:560px;margin:22px auto 0;text-align:left;font-size:12.5px;color:var(--t2);background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px 16px}
+.bkprep li{margin:4px 0 4px 18px}
+.bksteps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:1000px;margin:0 auto 18px}
+.bks{font-size:12px;color:var(--t2);background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:12px 14px}
+.bks strong{display:block;color:var(--t1);font-family:'Manrope',sans-serif;font-size:13px;margin-bottom:2px}
 
 /* ══════════════════════════════
    COMMUNITY
@@ -369,6 +415,8 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
   .hb{display:flex}
   .btypes{grid-template-columns:1fr}
   .fr{grid-template-columns:1fr}
+  .bkgrid{grid-template-columns:1fr;gap:22px}
+  .bksteps{grid-template-columns:1fr 1fr}
 }
 @media(max-width:640px){
   .sec{padding:56px 0}
@@ -387,6 +435,9 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
   .dnav{flex-direction:column-reverse;align-items:stretch}
   .dnav .btn{width:100%}
   .kgrid{grid-template-columns:1fr 1fr}
+  .bk2{padding:18px}
+  .btypes{grid-template-columns:1fr}
+  .bkok .acts .btn{width:100%}
 }
 </style>
 </head>
@@ -411,7 +462,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
         <a href="/blog/">Blog</a>
         <a href="#diagnostico">Diagnóstico</a>
         <a href="https://app.dizgo.app/simulador">Calculadora de Precios</a>
-        <a href="#consultoria">Consultoría</a>
+        <a href="#agendar">Agendar asesoría</a>
         <a href="#precios">Precios</a>
       </div>
       <div class="nc">
@@ -432,6 +483,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
   <a href="#diagnostico" onclick="toggleMM()">🩺 Diagnóstico Gratis</a>
   <a href="https://app.dizgo.app/simulador" onclick="toggleMM()">🧮 Calculadora de Precios</a>
   <a href="#consultoria" onclick="toggleMM()">💼 Consultoría Joan Torres</a>
+  <a href="#agendar" onclick="toggleMM()">📅 Agendar asesoría</a>
   <a href="#precios" onclick="toggleMM()">💳 Planes & Precios</a>
   <div class="mm-btns">
     <a href="https://app.dizgo.app" class="btn bapp" onclick="toggleMM()">🚀 Entrar a la App</a>
@@ -543,8 +595,8 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
     <div class="afw">
       <div class="fl">
         <div class="fi act fu d1" onclick="setF(this,'p')"><div class="fii">📋</div><div><div class="fit">P — Planear tu tienda</div><div class="fid">Costos fijos, nómina, precios estratégicos, punto de equilibrio y metas antes de gastar en pauta.</div></div></div>
-        <div class="fi fu d2" onclick="setF(this,'h')"><div class="fii">⚡</div><div><div class="fit">H — Ejecutar en tiempo real</div><div class="fid">Confirmación de pedidos, WhatsApp, logística, pauta Meta/TikTok, wallet Dropi y flujo de caja.</div></div></div>
-        <div class="fi fu d3" onclick="setF(this,'v')"><div class="fii">🔍</div><div><div class="fit">V — Verificar resultados</div><div class="fid">Dashboard comparativo planeado vs ejecutado. Embudo de tráfico, PyG mensual y alertas.</div></div></div>
+        <div class="fi fu d2" onclick="setF(this,'h')"><div class="fii">⚡</div><div><div class="fit">H — Ejecutar en tiempo real</div><div class="fid">Pedidos Dropi y Shopify, ciclo de caja por etapa, pauta Meta/TikTok, wallet Dropi, bodega y PQRSF.</div></div></div>
+        <div class="fi fu d3" onclick="setF(this,'v')"><div class="fii">🔍</div><div><div class="fit">V — Verificar resultados</div><div class="fid">P&amp;G planeado vs real, embudo con reconciliación Meta → Shopify → Dropi y alertas.</div></div></div>
         <div class="fi fu d4" onclick="setF(this,'a')"><div class="fii">🎯</div><div><div class="fit">A — Actuar y mejorar</div><div class="fid">Diagnósticos automáticos, recomendaciones de ajuste y escenarios de proyección.</div></div></div>
         <div class="fi fu d5" onclick="setF(this,'m')"><div class="fii">🏪</div><div><div class="fit">Multi-tienda & Roles</div><div class="fid">Gestiona varias tiendas. Roles: dueño, trafficker, confirmador, financiero.</div></div></div>
       </div>
@@ -752,7 +804,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
         <div class="dlv" id="rlv"></div>
         <div class="dmsg" id="rmsg"></div>
         <div class="dbtns">
-          <a href="#agendar" class="btn bg">📅 Agenda una Mentoría con Joan</a>
+          <a href="#agendar" class="btn bg" onclick="elegirServicio('diagnostico')">📅 Agenda tu Diagnóstico con Joan</a>
           <a href="https://app.dizgo.app/simulador" class="btn bo">🧮 Calcula tu precio de venta</a>
           <a href="https://app.dizgo.app" class="btn bapp">🚀 Empezar con DIZGO</a>
         </div>
@@ -796,46 +848,107 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
       <div class="fu d2">
         <h3 style="font-family:'Manrope',sans-serif;font-size:20px;font-weight:700;margin-bottom:18px">Servicios Disponibles</h3>
         <div class="sv">
-          <div class="sc2"><div style="font-size:22px;margin-bottom:8px">🩺</div><div class="sn">Diagnóstico Express</div><div class="sd">Sesión 60 min. Revisamos estructura de costos, KPIs y punto de equilibrio. Entregable: informe de hallazgos y plan de acción.</div><div class="sp"><div><div class="spv">$250.000 COP</div><div class="spn">~50 USD · 1 sesión Teams</div></div><a href="#agendar" class="btn bg" style="padding:8px 16px;font-size:12px">Agendar</a></div></div>
-          <div class="sc2" style="border-color:rgba(232,160,32,.25)"><div style="font-size:22px;margin-bottom:8px">🚀</div><div class="sn">Mentoría Premium — 4 Semanas</div><div class="sd">Acompañamiento completo: costos, equilibrio, precios, operación y campañas. Con grabación de sesiones y repositorio de recursos en OneDrive.</div><div class="sp"><div><div class="spv">$1.200.000 COP</div><div class="spn">~240 USD · 4 sesiones Teams</div></div><a href="#agendar" class="btn bg" style="padding:8px 16px;font-size:12px">Agendar</a></div></div>
-          <div class="sc2"><div style="font-size:22px;margin-bottom:8px">🏢</div><div class="sn">Consultoría Empresarial</div><div class="sd">Para empresas con equipos. Auditoría operativa, indicadores, capacitación y rediseño de procesos. Cotización personalizada.</div><div class="sp"><div><div class="spv">Cotización</div><div class="spn">Según alcance</div></div><a href="https://wa.me/573206348574?text=Hola%20Joan%2C%20quiero%20cotizar%20consultor%C3%ADa%20empresarial" target="_blank" class="btn bo" style="padding:8px 16px;font-size:12px">Escribir</a></div></div>
+          <div class="sc2"><div style="font-size:22px;margin-bottom:8px">🩺</div><div class="sn">Diagnóstico Express</div><div class="sd">Sesión 60 min. Revisamos costos, KPIs y punto de equilibrio, y cruzamos tus pedidos Meta Ads → Shopify → Dropi para encontrar las ventas que se pierden. Entregable: informe de hallazgos y plan de acción.</div><div class="sp"><div><div class="spv">$250.000 COP</div><div class="spn">~50 USD · 1 sesión Teams</div></div><a href="#agendar" onclick="elegirServicio('diagnostico')" class="btn bg" style="padding:8px 16px;font-size:12px">Agendar</a></div></div>
+          <div class="sc2" style="border-color:rgba(232,160,32,.25)"><div style="font-size:22px;margin-bottom:8px">🚀</div><div class="sn">Mentoría Premium — 4 Semanas</div><div class="sd">Acompañamiento completo: costos, equilibrio, precios, operación y campañas. Con grabación de sesiones y repositorio de recursos en OneDrive.</div><div class="sp"><div><div class="spv">$1.200.000 COP</div><div class="spn">~240 USD · 4 sesiones Teams</div></div><a href="#agendar" onclick="elegirServicio('mentoria')" class="btn bg" style="padding:8px 16px;font-size:12px">Agendar</a></div></div>
+          <div class="sc2"><div style="font-size:22px;margin-bottom:8px">🏢</div><div class="sn">Consultoría Empresarial</div><div class="sd">Para empresas con equipos. Auditoría operativa, indicadores, capacitación y rediseño de procesos. Cotización personalizada.</div><div class="sp"><div><div class="spv">Cotización</div><div class="spn">Llamada de alcance 30 min</div></div><a href="#agendar" onclick="elegirServicio('empresarial')" class="btn bo" style="padding:8px 16px;font-size:12px">Agendar llamada</a></div></div>
         </div>
       </div>
     </div>
 
-    <!-- BOOKING -->
-    <div id="agendar" style="margin-top:60px">
-      <div class="sl fu"><span class="tag tg">Reservar Sesión</span></div>
-      <h3 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px" class="fu d1">Agenda tu sesión con Joan</h3>
-      <p style="color:var(--t2);font-size:13px;margin-bottom:24px" class="fu d2">Sesiones vía Microsoft Teams · Grabación disponible para repaso · Confirmación en &lt;24h</p>
-      <div class="bk fu d2">
-        <div class="btypes">
-          <div class="bt on" onclick="setBT(this)"><div class="bti">🩺</div><div class="btn2">Diagnóstico<br>Express</div><div class="btp">$250.000</div></div>
-          <div class="bt" onclick="setBT(this)"><div class="bti">🚀</div><div class="btn2">Mentoría<br>4 Semanas</div><div class="btp">$1.200.000</div></div>
-          <div class="bt" onclick="setBT(this)"><div class="bti">🏢</div><div class="btn2">Empresarial</div><div class="btp">Cotizar</div></div>
-        </div>
-        <div class="bf">
-          <div class="fr">
-            <div class="fg"><label class="fl2">Nombre</label><input class="fi2" type="text" id="bname" placeholder="Tu nombre completo"></div>
-            <div class="fg"><label class="fl2">País</label><select class="fi2" id="bpais"><option>🇨🇴 Colombia</option><option>🇪🇨 Ecuador</option><option>🇲🇽 México</option><option>🇵🇦 Panamá</option><option>🌎 Otro LATAM</option></select></div>
-          </div>
-          <div class="fr">
-            <div class="fg"><label class="fl2">WhatsApp</label><input class="fi2" type="tel" id="bwa" placeholder="+57 300 000 0000"></div>
-            <div class="fg"><label class="fl2">Email</label><input class="fi2" type="email" id="bemail" placeholder="tu@email.com"></div>
-          </div>
-          <div class="fg"><label class="fl2">¿Cuál es tu principal reto?</label><textarea class="fi2" rows="3" id="breto" placeholder="Ej: No sé si mi tienda es rentable, tengo muchas devoluciones, quiero escalar..."></textarea></div>
-          <div class="fg">
-            <label class="fl2">Método de Pago</label>
-            <div class="po">
-              <div class="p-opt on" onclick="setPay(this)"><span class="p-ico">🏦</span>Bancolombia<br>Ahorros</div>
-              <div class="p-opt" onclick="setPay(this)"><span class="p-ico">📱</span>Nequi</div>
-              <div class="p-opt" onclick="setPay(this)"><span class="p-ico">💳</span>Stripe<br>Internacional</div>
+    <!-- BOOKING — agenda real: cupos libres desde app.dizgo.app/api/public/asesorias -->
+    <div id="agendar" style="margin-top:60px;scroll-margin-top:calc(var(--nav) + 20px)">
+      <div class="sl fu"><span class="tag tg">Agenda en línea</span></div>
+      <h3 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:700;margin-bottom:6px" class="fu d1">Agenda tu asesoría con Joan</h3>
+      <p style="color:var(--t2);font-size:13.5px;margin-bottom:22px;max-width:680px" class="fu d2">Elige el servicio, el tema y un horario libre de la agenda real. Las sesiones son por Microsoft Teams, con grabación para repasar. Joan confirma por WhatsApp en menos de 24 h y el pago se hace solo después de confirmar.</p>
+
+      <div class="bksteps fu d2">
+        <div class="bks"><strong>1 · Reservas</strong>Eliges horario. Queda apartado para ti.</div>
+        <div class="bks"><strong>2 · Confirmación</strong>Joan te escribe por WhatsApp con el enlace de Teams.</div>
+        <div class="bks"><strong>3 · Pago</strong>Bancolombia, Nequi o Stripe, después de confirmar.</div>
+        <div class="bks"><strong>4 · Sesión</strong>Trabajamos con tus cifras reales en DIZGO.</div>
+      </div>
+
+      <div class="bk2 fu d2" id="bkform">
+        <div class="bkgrid">
+          <!-- Columna izquierda: qué y cuándo -->
+          <div>
+            <div class="bstep"><b>1</b>Servicio</div>
+            <div class="btypes" style="margin-bottom:22px">
+              <div class="bt on" data-svc="diagnostico" onclick="setBT(this)"><div class="bti">🩺</div><div class="btn2">Diagnóstico Express</div><div class="btp">$250.000 COP</div><div class="btd">60 min</div></div>
+              <div class="bt" data-svc="mentoria" onclick="setBT(this)"><div class="bti">🚀</div><div class="btn2">Mentoría 4 Semanas</div><div class="btp">$1.200.000 COP</div><div class="btd">1ª de 4 sesiones · 60 min</div></div>
+              <div class="bt" data-svc="empresarial" onclick="setBT(this)"><div class="bti">🏢</div><div class="btn2">Empresarial</div><div class="btp">Cotización</div><div class="btd">Llamada de alcance · 30 min</div></div>
+            </div>
+
+            <div class="bstep"><b>2</b>¿Qué quieres resolver?</div>
+            <div class="tchips" id="btemas"></div>
+
+            <div class="bstep"><b>3</b>Fecha y hora</div>
+            <div id="bagenda">
+              <div class="days" id="bdays"><div class="skel" style="width:100%"></div></div>
+              <div class="slots" id="bslots"></div>
+              <div class="tznote" id="btz"></div>
+            </div>
+            <!-- Plan B si la agenda en línea no responde: se pide franja preferida y se confirma por WhatsApp -->
+            <div id="bmanual" style="display:none">
+              <div class="bmsg info show" style="margin-bottom:10px">La agenda en línea no cargó en este momento. Indica tu preferencia y Joan te propone un horario por WhatsApp.</div>
+              <div class="fr">
+                <div class="fg"><label class="fl2" for="bfecha">Fecha preferida</label><input class="fi2" type="date" id="bfecha"></div>
+                <div class="fg"><label class="fl2" for="bfranja">Franja</label><select class="fi2" id="bfranja"><option>Mañana (8–12 h Colombia)</option><option>Tarde (2–6 h Colombia)</option><option>Sábado en la mañana</option></select></div>
+              </div>
             </div>
           </div>
-          <div class="pi" id="payinfo">🏦 <strong style="color:var(--grn2)">Bancolombia Ahorros</strong> — Número de cuenta y confirmación se enviará a tu WhatsApp después de reservar.</div>
-          <button class="btn bg" style="width:100%;justify-content:center;padding:15px;font-size:15px" onclick="doBook()">📅 Confirmar Reserva →</button>
-          <p style="text-align:center;font-size:11px;color:var(--t3)">Joan confirmará tu sesión por WhatsApp en menos de 24 horas.</p>
+
+          <!-- Columna derecha: datos y confirmación -->
+          <div class="bf">
+            <div class="bstep" style="margin-bottom:0"><b>4</b>Tus datos</div>
+            <div class="fg"><label class="fl2" for="bname">Nombre</label><input class="fi2" type="text" id="bname" autocomplete="name" placeholder="Tu nombre completo"></div>
+            <div class="fr">
+              <div class="fg"><label class="fl2" for="bwa">WhatsApp</label><input class="fi2" type="tel" id="bwa" autocomplete="tel" placeholder="+57 300 000 0000"></div>
+              <div class="fg"><label class="fl2" for="bpais">País</label><select class="fi2" id="bpais"></select></div>
+            </div>
+            <div class="fg"><label class="fl2" for="bemail">Email <span style="text-transform:none;font-weight:400;color:var(--t3)">(opcional, te llega la confirmación)</span></label><input class="fi2" type="email" id="bemail" autocomplete="email" placeholder="tu@email.com"></div>
+            <div class="fg"><label class="fl2" for="breto">Cuéntale a Joan tu situación</label><textarea class="fi2" rows="3" id="breto" placeholder="Ej: vendo 300 pedidos/mes, Meta reporta más ventas de las que llegan a Dropi y no sé si estoy ganando..."></textarea></div>
+            <label class="bchk"><input type="checkbox" id="bcuenta"> Ya uso DIZGO App (revisamos la sesión con tus datos ahí)</label>
+            <div class="fg">
+              <label class="fl2">Método de pago preferido</label>
+              <div class="po">
+                <div class="p-opt on" data-pago="Bancolombia" onclick="setPay(this)"><span class="p-ico">🏦</span>Bancolombia</div>
+                <div class="p-opt" data-pago="Nequi" onclick="setPay(this)"><span class="p-ico">📱</span>Nequi</div>
+                <div class="p-opt" data-pago="Stripe" onclick="setPay(this)"><span class="p-ico">💳</span>Stripe<br>Internacional</div>
+              </div>
+            </div>
+            <div class="pi" id="payinfo">🏦 <strong style="color:var(--grn2)">Bancolombia Ahorros</strong> — Los datos de pago llegan a tu WhatsApp cuando Joan confirme la sesión.</div>
+            <input class="hpot" type="text" id="bweb" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="bsum" id="bsum">Elige un horario para ver el resumen de tu reserva.</div>
+            <div class="bmsg" id="bmsg" role="alert"></div>
+            <button class="btn bg" id="bbtn" style="width:100%;justify-content:center;padding:15px;font-size:15px" onclick="doBook()">📅 Reservar mi sesión →</button>
+            <p style="text-align:center;font-size:11px;color:var(--t3);margin:0">Sin pago por adelantado. Si necesitas cambiar el horario, responde al WhatsApp de confirmación.</p>
+          </div>
         </div>
+      </div>
+
+      <!-- Confirmación -->
+      <div class="bk2 bkok" id="bkok" aria-live="polite">
+        <div style="font-size:44px">🎉</div>
+        <h3 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;margin-top:6px">¡Reserva recibida!</h3>
+        <p style="color:var(--t2);font-size:14px;margin-top:6px" id="okcuando"></p>
+        <div class="code" id="okcode"></div>
+        <p style="color:var(--t2);font-size:13px;max-width:520px;margin:0 auto">Joan te escribe por WhatsApp en menos de 24 h para confirmar y enviarte el enlace de Teams. Si quieres agilizarlo, envíale tu código ahora:</p>
+        <div class="acts">
+          <a class="btn bwa" id="okwa" href="#" target="_blank" rel="noopener">💬 Enviar código por WhatsApp</a>
+          <a class="btn bo" id="okgcal" href="#" target="_blank" rel="noopener">🗓️ Google Calendar</a>
+          <button class="btn bo" onclick="descargarICS()">📥 Descargar .ics</button>
+        </div>
+        <div class="bkprep">
+          <strong style="color:var(--t1);font-family:'Manrope',sans-serif">Para aprovechar la sesión, ten a mano:</strong>
+          <ul style="margin-top:6px">
+            <li>Ventas, pedidos y devoluciones del último mes (export de Dropi o Shopify).</li>
+            <li>Gasto en pauta de Meta/TikTok del mismo periodo.</li>
+            <li>Tus costos fijos: arriendo, nómina, plataformas.</li>
+          </ul>
+          <div style="margin-top:10px">Si los cargas antes en <a href="https://app.dizgo.app/auth/registro" style="color:var(--gold);text-decoration:underline">DIZGO App (plan Explorador, gratis)</a>, Joan llega a la sesión con la reconciliación de pedidos y tu punto de equilibrio ya calculados.</div>
+        </div>
+        <button class="btn bo" style="margin-top:18px;padding:9px 18px;font-size:12px" onclick="nuevaReserva()">Agendar otra sesión</button>
       </div>
     </div>
   </div>
@@ -962,8 +1075,9 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 0 28px}
       <div class="fc">
         <h4>Servicios</h4>
         <a href="#consultoria">Consultoría</a>
-        <a href="#agendar">Mentoría Premium</a>
-        <a href="#agendar">Diagnóstico Express</a>
+        <a href="#agendar">Agendar asesoría</a>
+        <a href="#agendar" onclick="elegirServicio('mentoria')">Mentoría Premium</a>
+        <a href="#agendar" onclick="elegirServicio('diagnostico')">Diagnóstico Express</a>
         <a href="https://www.linkedin.com/in/joantorres9" target="_blank">LinkedIn Joan</a>
       </div>
     </div>
@@ -1055,6 +1169,8 @@ function actualizarPreciosMoneda(){
   const nombreEl = document.getElementById('paisAvisoNombre');
   if(nombreEl) nombreEl.textContent = p.nombre;
   document.querySelectorAll('.paisDropdownSelect').forEach(s => { s.value = paisVisitante; });
+  const bp = document.getElementById('bpais');
+  if(bp && !bp.dataset.tocado && PAISES_MONEDA[paisVisitante]) bp.value = paisVisitante;
 
   ['emprendedor','empresarial'].forEach(plan=>{
     const cop = PRECIO_BASE_COP[plan];
@@ -1140,12 +1256,12 @@ const screens = {
     <div class="row-item"><span>Meta Ads (mín)</span><span style="color:var(--gold);font-weight:700">$2.000.000</span></div>
     <div style="display:flex;justify-content:space-between;padding:10px 12px;background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.2);border-radius:8px;font-size:13px;margin-top:4px"><strong>Total Costos Fijos</strong><strong style="color:var(--gold)">$7.420.000</strong></div>
     <div style="margin-top:12px;padding:10px;background:rgba(45,212,160,.06);border:1px solid rgba(45,212,160,.15);border-radius:8px;font-size:11px;color:var(--grn2)">✓ Necesitas 94 pedidos entregados para cubrir costos este mes.</div>`,
-  h:`<div class="mbadge" style="background:rgba(45,212,160,.09);border-color:rgba(45,212,160,.18);color:var(--grn2)">⚡ HACER</div><div style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px">Pedidos de Hoy</div>
-    <div class="row-item" style="background:rgba(45,212,160,.06)"><span>✅ Confirmados</span><span style="color:var(--grn2);font-weight:700">34</span></div>
-    <div class="row-item" style="background:rgba(240,92,92,.06)"><span>❌ No contestaron</span><span style="color:var(--red2);font-weight:700">12</span></div>
-    <div class="row-item" style="background:rgba(232,160,32,.06)"><span>⏳ Pendientes</span><span style="color:var(--gold);font-weight:700">8</span></div>
-    <div class="row-item"><span>🚚 En camino</span><span style="color:var(--blue2);font-weight:700">21</span></div>
-    <div style="margin-top:10px;padding:10px;background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.15);border-radius:8px;font-size:11px;color:var(--gold)">⚡ Confirmación hoy: 64% — objetivo 68%. Ajustar horario de llamadas.</div>`,
+  h:`<div class="mbadge" style="background:rgba(45,212,160,.09);border-color:rgba(45,212,160,.18);color:var(--grn2)">⚡ HACER</div><div style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px">Reconciliación de Pedidos</div>
+    <div class="row-item"><span>📣 Meta Ads reporta</span><span style="color:var(--blue2);font-weight:700">300 ventas</span></div>
+    <div class="row-item"><span>🛒 Entraron a Shopify</span><span style="color:var(--gold);font-weight:700">290 <span style="color:var(--red2);font-size:11px">−10</span></span></div>
+    <div class="row-item"><span>🚚 Pasaron a Dropi</span><span style="color:var(--gold);font-weight:700">230 <span style="color:var(--red2);font-size:11px">−60</span></span></div>
+    <div class="row-item" style="background:rgba(240,92,92,.06)"><span>🕵️ Pedidos identificados sin despachar</span><span style="color:var(--red2);font-weight:700">60</span></div>
+    <div style="margin-top:10px;padding:10px;background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.15);border-radius:8px;font-size:11px;color:var(--gold)">💰 Cruce por teléfono y fecha: 60 pedidos que nunca llegaron a Dropi. Es dinero que ya pagaste en pauta.</div>`,
   v:`<div class="mbadge" style="background:rgba(74,158,245,.09);border-color:rgba(74,158,245,.18);color:var(--blue2)">🔍 VERIFICAR</div><div style="font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px">PyG — Planeado vs Real</div>
     <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:5px;padding:7px 0;border-bottom:1px solid var(--b1);font-size:10px;color:var(--t3);font-weight:700"><span>CONCEPTO</span><span style="text-align:right">PLAN</span><span style="text-align:right">REAL</span></div>
     <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:5px;padding:9px 0;border-bottom:1px solid var(--b1);font-size:13px"><span>Ingresos</span><span style="text-align:right;color:var(--t2)">$8M</span><span style="text-align:right;color:var(--grn2);font-weight:700">$9.2M↑</span></div>
@@ -1465,6 +1581,7 @@ function showResult(){
   else if(pct>=55){em='📊';lv='En Desarrollo';col='var(--gold)';msg='Tienes intuición pero falta estructura. Estás dejando dinero sobre la mesa sin saberlo. Con DIZGO en 30 días tendrás claridad total de tu negocio.';}
   else if(pct>=30){em='⚠️';lv='Zona de Riesgo';col='var(--red2)';msg='Tu tienda opera en modo reactivo. Sin estructura de costos ni punto de equilibrio, estás apostando sin red. Agenda con Joan — es urgente antes de seguir en pauta.';}
   else{em='🆘';lv='Acción Inmediata';col='var(--red2)';msg='Tu negocio tiene fugas que no ves. Cada día sin estructura es dinero perdido. Una sesión con Joan puede cambiar el rumbo en menos de 2 horas.';}
+  window.dzDiag = { pct, lv }; // viaja como contexto en la reserva de asesoría
   document.getElementById('remi').textContent=em;
   document.getElementById('rsc').textContent=pct+'%';
   document.getElementById('rsc').style.color=col;
@@ -1485,35 +1602,260 @@ function resetD(){
   document.getElementById('dnx').textContent='Siguiente →';
 }
 
-// ── BOOKING ──
-function setBT(el){ document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on')); el.classList.add('on'); }
-const payMsgs = {
-  'Bancolombia\nAhorros':'🏦 <strong style="color:var(--grn2)">Bancolombia Ahorros</strong> — Número de cuenta y confirmación se enviará a tu WhatsApp tras confirmar.',
-  'Nequi':'📱 <strong style="color:var(--grn2)">Nequi</strong> — Número Nequi y confirmación se enviará a tu WhatsApp tras confirmar.',
-  'Stripe\nInternacional':'💳 <strong style="color:var(--blue2)">Stripe Internacional</strong> — Link de pago seguro en USD/EUR. Tarjetas de 135+ países aceptadas.'
+</script>
+<script>
+// ── BOOKING — agenda real de asesorías ──
+// Va en su propio <script> a propósito: si otro bloque de la página falla (ej. el CDN de
+// Chart.js no carga), la agenda sigue funcionando.
+// La disponibilidad y las reservas viven en DIZGO App (Supabase, tabla asesorias). Aquí solo se
+// pintan los cupos libres y se envía la reserva; el servidor re-valida el horario antes de guardar.
+// Si la API no responde, el formulario cae a modo manual y la solicitud sale por WhatsApp.
+const API_DZ = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+  ? (new URLSearchParams(location.search).get('api') || 'http://localhost:3000')
+  : 'https://app.dizgo.app';
+const WA_DZ = '573206348574';
+const TZ_VIS = (()=>{ try{ return Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Bogota'; }catch(e){ return 'America/Bogota'; } })();
+const SVC_BK = {
+  diagnostico:{ n:'Diagnóstico Express', d:60, p:250000 },
+  mentoria:{ n:'Mentoría Premium — 4 Semanas', d:60, p:1200000 },
+  empresarial:{ n:'Consultoría Empresarial — Llamada de alcance', d:30, p:null },
 };
+// Mismas claves que src/lib/asesorias.ts (TEMAS) en dizgo-app
+const TEMAS_BK = [
+  { k:'rentabilidad', l:'¿Mi tienda es rentable?' },
+  { k:'costos', l:'Costos ocultos y punto de equilibrio' },
+  { k:'precio', l:'Precio y costeo por producto' },
+  { k:'fuga', l:'Pedidos que se pierden (Meta → Shopify → Dropi)' },
+  { k:'caja', l:'Ciclo de caja, devoluciones y wallet' },
+  { k:'pauta', l:'Escalar pauta sin perder margen' },
+  { k:'equipo', l:'Procesos, equipo e indicadores' },
+  { k:'otro', l:'Otro tema' },
+];
+const BK = { svc:'diagnostico', tema:null, dia:null, slot:null, cupos:{}, manual:false, ultima:null, pidiendo:0 };
+const payMsgs = {
+  Bancolombia:'🏦 <strong style="color:var(--grn2)">Bancolombia Ahorros</strong> — Los datos de pago llegan a tu WhatsApp cuando Joan confirme la sesión.',
+  Nequi:'📱 <strong style="color:var(--grn2)">Nequi</strong> — El número Nequi llega a tu WhatsApp cuando Joan confirme la sesión.',
+  Stripe:'💳 <strong style="color:var(--blue2)">Stripe Internacional</strong> — Link de pago seguro en USD/EUR (tarjetas de 135+ países), enviado al confirmar.'
+};
+const fmtCOP = v => '$' + Number(v).toLocaleString('es-CO') + ' COP';
+const horaEn = (iso, tz) => new Date(iso).toLocaleTimeString('es-CO', { timeZone: tz, hour: 'numeric', minute: '2-digit' });
+const fechaLarga = (iso, tz) => { const t = new Date(iso).toLocaleString('es-CO', { timeZone: tz, weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit' }); return t.charAt(0).toUpperCase() + t.slice(1); };
+const mismaHora = iso => horaEn(iso, TZ_VIS) === horaEn(iso, 'America/Bogota');
+const escH = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function bkMsg(txt, tipo){
+  const el = document.getElementById('bmsg');
+  el.className = 'bmsg' + (txt ? ' show' : '') + (tipo === 'info' ? ' info' : '');
+  el.textContent = txt || '';
+}
+
+function setBT(el){
+  document.querySelectorAll('.bt').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  const nuevo = el.dataset.svc || 'diagnostico';
+  if (nuevo !== BK.svc){ BK.svc = nuevo; BK.slot = null; cargarAgenda(); }
+  bkResumen();
+}
+// Usado por las tarjetas de servicios y el diagnóstico: preselecciona y baja a la agenda
+function elegirServicio(k){
+  const el = document.querySelector(`.bt[data-svc="${k}"]`);
+  if (el) setBT(el);
+}
 function setPay(el){
   document.querySelectorAll('.p-opt').forEach(p=>p.classList.remove('on'));
   el.classList.add('on');
-  document.getElementById('payinfo').innerHTML = payMsgs[el.textContent.trim()] || Object.values(payMsgs)[0];
+  document.getElementById('payinfo').innerHTML = payMsgs[el.dataset.pago] || payMsgs.Bancolombia;
+  bkResumen();
 }
-function doBook(){
-  const n = document.getElementById('bname').value.trim();
-  const wa = document.getElementById('bwa').value.trim();
-  if(!n){alert('Por favor ingresa tu nombre.');return;}
-  if(!wa){alert('Por favor ingresa tu WhatsApp — así te confirmamos la sesión.');return;}
-  const pais = document.getElementById('bpais').value;
-  const email = document.getElementById('bemail').value.trim();
-  const reto = document.getElementById('breto').value.trim();
-  const pago = document.querySelector('.p-opt.on').textContent.replace(/\s+/g,' ').trim();
-  const svc = document.querySelector('.bt.on .btn2').textContent.replace(/\n/g,' ').trim();
-  let txt = `Hola Joan! Quiero reservar una sesión de *${svc}* en DIZGO.\n\nNombre: ${n}\nPaís: ${pais}\nWhatsApp: ${wa}`;
-  if(email) txt += `\nEmail: ${email}`;
-  if(reto) txt += `\nMi reto: ${reto}`;
-  txt += `\nMétodo de pago preferido: ${pago}\n\n¿Cuál es el siguiente paso?`;
-  const msg = encodeURIComponent(txt);
-  window.open(`https://wa.me/573206348574?text=${msg}`,'_blank');
+function setTema(el){
+  document.querySelectorAll('.tchip').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on'); BK.tema = el.dataset.k; bkResumen();
 }
+
+function initBooking(){
+  document.getElementById('btemas').innerHTML = TEMAS_BK.map(t =>
+    `<button type="button" class="tchip" data-k="${t.k}" onclick="setTema(this)">${t.l}</button>`).join('');
+  const sel = document.getElementById('bpais');
+  const PM = (typeof PAISES_MONEDA !== 'undefined') ? PAISES_MONEDA : { COL:{ nombre:'Colombia', bandera:'🇨🇴' } };
+  sel.innerHTML = Object.entries(PM).map(([c,p]) => `<option value="${c}">${p.bandera} ${p.nombre}</option>`).join('')
+    + '<option value="OTRO">🌎 Otro país</option>';
+  sel.value = (typeof paisVisitante !== 'undefined') ? paisVisitante : 'COL';
+  sel.addEventListener('change', () => { sel.dataset.tocado = '1'; });
+  const hoy = new Date(); const f = document.getElementById('bfecha');
+  if (f) f.min = hoy.toISOString().slice(0,10);
+  ['bname','bwa'].forEach(id => document.getElementById(id).addEventListener('input', () => bkMsg('')));
+  cargarAgenda();
+}
+
+async function cargarAgenda(){
+  const pedido = ++BK.pidiendo; // descarta respuestas viejas si el usuario cambia rápido de servicio
+  document.getElementById('bdays').innerHTML = '<div class="skel" style="width:100%"></div>';
+  document.getElementById('bslots').innerHTML = '';
+  try {
+    const r = await fetch(`${API_DZ}/api/public/asesorias/disponibilidad?servicio=${BK.svc}`, { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    if (pedido !== BK.pidiendo) return;
+    BK.cupos = d.cupos || {}; BK.manual = false;
+    document.getElementById('bagenda').style.display = '';
+    document.getElementById('bmanual').style.display = 'none';
+    const dias = Object.keys(BK.cupos);
+    if (!BK.dia || !BK.cupos[BK.dia]) BK.dia = dias[0] || null;
+    if (BK.slot && !(BK.cupos[BK.dia] || []).includes(BK.slot)) BK.slot = null;
+    renderDias(); renderSlots(); bkResumen();
+  } catch (e) {
+    if (pedido !== BK.pidiendo) return;
+    BK.manual = true;
+    document.getElementById('bagenda').style.display = 'none';
+    document.getElementById('bmanual').style.display = '';
+    bkResumen();
+  }
+}
+
+function renderDias(){
+  const dias = Object.keys(BK.cupos);
+  const cont = document.getElementById('bdays');
+  if (!dias.length){
+    cont.innerHTML = '<div class="tznote" style="margin:0">No quedan horarios libres en las próximas 3 semanas. Escríbele a Joan por <a href="https://wa.me/'+WA_DZ+'" target="_blank" style="color:var(--grn2)">WhatsApp</a> y te abre un espacio.</div>';
+    return;
+  }
+  cont.innerHTML = dias.map(d => {
+    const dt = new Date(d + 'T12:00:00Z');
+    const w = dt.toLocaleDateString('es-CO', { weekday: 'short', timeZone: 'UTC' }).replace('.', '');
+    const m = dt.toLocaleDateString('es-CO', { month: 'short', timeZone: 'UTC' }).replace('.', '');
+    const n = BK.cupos[d].length;
+    return `<button type="button" class="day${d === BK.dia ? ' on' : ''}" data-d="${d}" onclick="setDia('${d}')"><div class="dw">${w}</div><div class="dn">${dt.getUTCDate()}</div><div class="dm">${m}</div><div class="dc2">${n} libre${n===1?'':'s'}</div></button>`;
+  }).join('');
+}
+function setDia(d){
+  BK.dia = d; BK.slot = null;
+  document.querySelectorAll('.day').forEach(x => x.classList.toggle('on', x.dataset.d === d));
+  renderSlots(); bkResumen();
+}
+function renderSlots(){
+  const cont = document.getElementById('bslots');
+  const tz = document.getElementById('btz');
+  const lista = BK.cupos[BK.dia] || [];
+  cont.innerHTML = lista.map(iso => {
+    const co = mismaHora(iso) ? '' : `<small>${horaEn(iso,'America/Bogota')} CO</small>`;
+    return `<button type="button" class="slot${iso === BK.slot ? ' on' : ''}" data-iso="${iso}" onclick="setSlot('${iso}')">${horaEn(iso, TZ_VIS)}${co}</button>`;
+  }).join('');
+  const difiere = lista.length && !mismaHora(lista[0]);
+  tz.innerHTML = difiere
+    ? `🕒 Horas en <strong style="color:var(--t2)">tu zona (${escH(TZ_VIS.replace('_',' '))})</strong>. Debajo, la hora equivalente en Colombia, donde atiende Joan.`
+    : '🕒 Horas en hora Colombia (GMT-5). Lunes a viernes 8–12 y 2–6 · sábados 8–12.';
+}
+function setSlot(iso){
+  BK.slot = iso;
+  document.querySelectorAll('.slot').forEach(x => x.classList.toggle('on', x.dataset.iso === iso));
+  bkMsg(''); bkResumen();
+}
+
+function bkResumen(){
+  const s = SVC_BK[BK.svc];
+  const precio = s.p ? fmtCOP(s.p) : 'Cotización según alcance';
+  const tema = TEMAS_BK.find(t => t.k === BK.tema);
+  const el = document.getElementById('bsum');
+  if (BK.manual){
+    el.innerHTML = `<strong>${s.n}</strong> · ${s.d} min · ${precio}<br>Horario: lo acuerdas con Joan por WhatsApp.`;
+    document.getElementById('bbtn').textContent = '💬 Solicitar por WhatsApp →';
+    return;
+  }
+  document.getElementById('bbtn').textContent = '📅 Reservar mi sesión →';
+  if (!BK.slot){ el.innerHTML = `<strong>${s.n}</strong> · ${s.d} min · ${precio}<br>Elige un horario para completar tu reserva.`; return; }
+  const local = fechaLarga(BK.slot, TZ_VIS);
+  const co = mismaHora(BK.slot) ? '' : ` <span style="color:var(--t3)">(${horaEn(BK.slot,'America/Bogota')} en Colombia)</span>`;
+  el.innerHTML = `<strong>${s.n}</strong> · ${s.d} min · ${precio}<br>🗓️ <strong>${local}</strong>${co}${tema ? `<br>🎯 ${tema.l}` : ''}`;
+}
+
+function datosForm(){
+  const pais = document.getElementById('bpais');
+  return {
+    nombre: document.getElementById('bname').value.trim(),
+    whatsapp: document.getElementById('bwa').value.trim(),
+    email: document.getElementById('bemail').value.trim(),
+    pais: pais.options[pais.selectedIndex] ? pais.options[pais.selectedIndex].text.replace(/^\S+\s/, '') : '',
+    reto: document.getElementById('breto').value.trim(),
+    tiene_cuenta: document.getElementById('bcuenta').checked,
+    metodo_pago: (document.querySelector('.p-opt.on') || {}).dataset?.pago || 'Por definir',
+    website: document.getElementById('bweb').value,
+  };
+}
+
+async function doBook(){
+  const f = datosForm();
+  if (f.nombre.length < 2){ bkMsg('Escribe tu nombre para reservar.'); document.getElementById('bname').focus(); return; }
+  if (f.whatsapp.replace(/\D/g,'').length < 7){ bkMsg('Escribe tu WhatsApp con indicativo de país — por ahí te confirmamos.'); document.getElementById('bwa').focus(); return; }
+  if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)){ bkMsg('Revisa tu correo, o déjalo vacío.'); document.getElementById('bemail').focus(); return; }
+  // Si viene del diagnóstico gratuito, Joan recibe el puntaje como contexto
+  if (window.dzDiag) f.reto = (f.reto ? f.reto + '\n\n' : '') + `[Diagnóstico web: ${window.dzDiag.pct}% — ${window.dzDiag.lv}]`;
+  const s = SVC_BK[BK.svc];
+  const tema = TEMAS_BK.find(t => t.k === BK.tema);
+
+  if (BK.manual){
+    const fecha = document.getElementById('bfecha').value;
+    const franja = document.getElementById('bfranja').value;
+    let txt = `Hola Joan! Quiero agendar *${s.n}* en DIZGO.\n\nNombre: ${f.nombre}\nPaís: ${f.pais}\nWhatsApp: ${f.whatsapp}`;
+    if (f.email) txt += `\nEmail: ${f.email}`;
+    if (tema) txt += `\nTema: ${tema.l}`;
+    txt += `\nPreferencia: ${fecha || 'cualquier día'} · ${franja}`;
+    if (f.reto) txt += `\nMi situación: ${f.reto}`;
+    txt += `\nPago preferido: ${f.metodo_pago}\n\n¿Qué horario tienes disponible?`;
+    window.open(`https://wa.me/${WA_DZ}?text=${encodeURIComponent(txt)}`, '_blank');
+    return;
+  }
+  if (!BK.slot){ bkMsg('Elige un día y una hora de la agenda.'); document.getElementById('bdays').scrollIntoView({ behavior:'smooth', block:'center' }); return; }
+
+  const btn = document.getElementById('bbtn');
+  btn.disabled = true; btn.textContent = 'Reservando…'; bkMsg('');
+  try {
+    const r = await fetch(`${API_DZ}/api/public/asesorias/reservar`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...f, servicio: BK.svc, tema: BK.tema, inicio: BK.slot, zona_horaria: TZ_VIS }),
+    });
+    const d = await r.json().catch(() => ({}));
+    if (r.status === 409){ bkMsg(d.error || 'Ese horario acaba de ocuparse. Elige otro.'); BK.slot = null; await cargarAgenda(); return; }
+    if (!r.ok) throw new Error(d.error || 'No pudimos guardar tu reserva.');
+    BK.ultima = d;
+    mostrarConfirmacion(d);
+  } catch (e) {
+    bkMsg((e && e.message ? e.message : 'No pudimos guardar tu reserva.') + ' Puedes escribirle directo a Joan por WhatsApp.');
+  } finally {
+    btn.disabled = false; bkResumen();
+  }
+}
+
+function mostrarConfirmacion(d){
+  document.getElementById('bkform').style.display = 'none';
+  const ok = document.getElementById('bkok'); ok.classList.add('show');
+  const co = mismaHora(d.inicio) ? '' : ` · ${horaEn(d.inicio,'America/Bogota')} en Colombia`;
+  document.getElementById('okcuando').innerHTML = `<strong style="color:var(--t1)">${escH(d.servicio)}</strong><br>${fechaLarga(d.inicio, TZ_VIS)}${co} · ${d.duracionMin} min`;
+  document.getElementById('okcode').textContent = d.codigo;
+  document.getElementById('okwa').href = d.whatsapp_url;
+  document.getElementById('okgcal').href = d.google_calendar;
+  document.getElementById('agendar').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function nuevaReserva(){
+  document.getElementById('bkok').classList.remove('show');
+  document.getElementById('bkform').style.display = '';
+  BK.slot = null; cargarAgenda();
+}
+// Archivo .ics para Outlook / Apple Calendar (Teams vive en Outlook, así que es el más útil)
+function descargarICS(){
+  const d = BK.ultima; if (!d) return;
+  const f = iso => new Date(iso).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const e = t => String(t).replace(/([,;\\])/g,'\\$1');
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//DIZGO//Asesorias//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
+    `UID:${d.codigo}@dizgo.app`, `DTSTAMP:${f(new Date().toISOString())}`, `DTSTART:${f(d.inicio)}`, `DTEND:${f(d.fin)}`,
+    `SUMMARY:${e('DIZGO · ' + d.servicio)}`,
+    `DESCRIPTION:${e('Sesión con Joan Torres. Código ' + d.codigo + '. El enlace de Microsoft Teams llega por WhatsApp al confirmar.')}`,
+    'LOCATION:Microsoft Teams','BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:Sesión DIZGO en 30 minutos','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+  a.download = `dizgo-${d.codigo}.ics`; document.body.appendChild(a); a.click(); a.remove();
+}
+initBooking();
 </script>
 </body>
 </html>
